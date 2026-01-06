@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>รายงานบริการกลุ่มเป้าหมายเร่งรัด โรงพยาบาลกุสุมาลย์ จังหวัดสกลนคร</title>
     
     <!-- Google Fonts: Kanit Only (โหลดเฉพาะฟอนต์ที่จำเป็น) -->
@@ -163,9 +164,9 @@
       .num-cell { text-align: center; font-weight: 700; font-size: 28px; } 
       .change-cell { text-align: center; font-weight: 600; font-size: 18px; }
       
-      /* ตัวเลขแถวรวม (ใหญ่ขึ้น 1 ระดับ และเป็นสีดำสำหรับ 3 คอลัมน์แรก) */
+      /* ตัวเลขแถวรวม */
       .num-cell-total { 
-        text-align: center; font-weight: 800; font-size: 30px; color: #333; /* เปลี่ยนเป็นสีดำ */
+        text-align: center; font-weight: 800; font-size: 30px; color: #333; 
       }
       .change-cell-total { 
         text-align: center; font-weight: 800; font-size: 30px; 
@@ -291,7 +292,7 @@
         </div>
       </div>
 
-      <!-- Occupancy Double Bars -->
+      <!-- Occupancy Triple Bars (Revised with Fiscal Year) -->
       <div class="grid-responsive">
         <!-- General Occupancy -->
         <div class="card occupancy-card">
@@ -313,14 +314,23 @@
             </div>
             <div class="text-right" style="width:60px; font-size:20px; font-weight:bold; color:#10b981;"><span id="txt_gen_today">0.0</span>%</div>
           </div>
-          <!-- Accum -->
-          <div class="flex items-center gap-2">
-            <div style="width:35px; font-size:12px; font-weight:bold; color:#64748b;">สะสม</div>
+          <!-- Accum Month -->
+          <div class="flex items-center mb-2 gap-2">
+            <div style="width:35px; font-size:12px; font-weight:bold; color:#64748b;">เดือนนี้</div>
             <div style="flex:1; position:relative; height:16px;">
               <div class="target-line" style="left:80%;"></div>
               <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar_gen_accum" style="background:linear-gradient(90deg, #93c5fd, #3b82f6);"></div></div>
             </div>
             <div class="text-right" style="width:60px; font-size:20px; font-weight:bold; color:#3b82f6;"><span id="txt_gen_accum">0.0</span>%</div>
+          </div>
+          <!-- Fiscal Year -->
+          <div class="flex items-center gap-2">
+            <div style="width:35px; font-size:12px; font-weight:bold; color:#64748b;">ปีงบนี้</div>
+            <div style="flex:1; position:relative; height:16px;">
+              <div class="target-line" style="left:80%;"></div>
+              <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar_gen_fiscal" style="background:linear-gradient(90deg, #d8b4fe, #a855f7);"></div></div>
+            </div>
+            <div class="text-right" style="width:60px; font-size:20px; font-weight:bold; color:#a855f7;"><span id="txt_gen_fiscal">0.0</span>%</div>
           </div>
         </div>
 
@@ -344,14 +354,23 @@
             </div>
             <div class="text-right" style="width:60px; font-size:20px; font-weight:bold; color:#10b981;"><span id="txt_spec_today">0.0</span>%</div>
           </div>
-          <!-- Accum -->
-          <div class="flex items-center gap-2">
-            <div style="width:35px; font-size:12px; font-weight:bold; color:#64748b;">สะสม</div>
+          <!-- Accum Month -->
+          <div class="flex items-center mb-2 gap-2">
+            <div style="width:35px; font-size:12px; font-weight:bold; color:#64748b;">เดือนนี้</div>
             <div style="flex:1; position:relative; height:16px;">
               <div class="target-line" style="left:80%;"></div>
               <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar_spec_accum" style="background:linear-gradient(90deg, #93c5fd, #3b82f6);"></div></div>
             </div>
             <div class="text-right" style="width:60px; font-size:20px; font-weight:bold; color:#3b82f6;"><span id="txt_spec_accum">0.0</span>%</div>
+          </div>
+           <!-- Fiscal Year -->
+           <div class="flex items-center gap-2">
+            <div style="width:35px; font-size:12px; font-weight:bold; color:#64748b;">ปีงบนี้</div>
+            <div style="flex:1; position:relative; height:16px;">
+              <div class="target-line" style="left:80%;"></div>
+              <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar_spec_fiscal" style="background:linear-gradient(90deg, #d8b4fe, #a855f7);"></div></div>
+            </div>
+            <div class="text-right" style="width:60px; font-size:20px; font-weight:bold; color:#a855f7;"><span id="txt_spec_fiscal">0.0</span>%</div>
           </div>
         </div>
       </div>
@@ -376,15 +395,24 @@
           </div>
           <div class="text-right" style="width:60px; font-size:20px; font-weight:bold; color:#10b981;"><span id="txt_total_today">0.0</span>%</div>
         </div>
-        <!-- Accum -->
-        <div class="flex items-center gap-2">
-          <div style="width:35px; font-size:12px; font-weight:bold; color:#64748b;">สะสม</div>
+        <!-- Accum Month -->
+        <div class="flex items-center mb-2 gap-2">
+          <div style="width:35px; font-size:12px; font-weight:bold; color:#64748b;">เดือนนี้</div>
           <div style="flex:1; position:relative; height:20px;">
             <div class="target-line" style="left:80%; top:-4px; bottom:-4px;"></div>
             <div class="progress-bar-bg" style="height:20px;"><div class="progress-bar-fill" id="bar_total_accum" style="background:linear-gradient(90deg, #93c5fd, #3b82f6);"></div></div>
           </div>
           <div class="text-right" style="width:60px; font-size:20px; font-weight:bold; color:#3b82f6;"><span id="txt_total_accum">0.0</span>%</div>
         </div>
+        <!-- Fiscal Year -->
+        <div class="flex items-center gap-2">
+            <div style="width:35px; font-size:12px; font-weight:bold; color:#64748b;">ปีงบนี้</div>
+            <div style="flex:1; position:relative; height:20px;">
+              <div class="target-line" style="left:80%; top:-4px; bottom:-4px;"></div>
+              <div class="progress-bar-bg" style="height:20px;"><div class="progress-bar-fill" id="bar_total_fiscal" style="background:linear-gradient(90deg, #d8b4fe, #a855f7);"></div></div>
+            </div>
+            <div class="text-right" style="width:60px; font-size:20px; font-weight:bold; color:#a855f7;"><span id="txt_total_fiscal">0.0</span>%</div>
+          </div>
       </div>
 
       <!-- Rights & Services -->
@@ -402,7 +430,7 @@
           </div>
           <div class="table-responsive">
             <table class="custom-table">
-              <thead><tr><th>สิทธิการรักษา</th><th class="center">วันนี้</th><th class="center">เดือนนี้</th><th class="center">เดือนที่แล้ว</th><th class="center">+/-</th></tr></thead>
+              <thead><tr><th>สิทธิการรักษา</th><th class="center">วันนี้</th><th class="center">เดือนนี้</th><th class="center">ปีที่แล้ว</th><th class="center">+/-</th></tr></thead>
               <tbody>
                 <tr>
                     <td>เบิกได้</td>
@@ -460,7 +488,7 @@
               </div>
               <div><div class="service-name">กายภาพบำบัด</div><div class="service-desc" id="service_pt_desc">-</div></div>
             </div>
-            <div class="text-right"><div class="stat-val-red" style="font-size:26px;" id="service_pt_total">0</div><div class="stat-label">ราย</div></div>
+            <div class="text-right"><div class="stat-val-red" style="font-size:20px;" id="service_pt_total">0</div><div class="stat-label">ราย</div></div>
           </div>
 
           <div class="service-item">
@@ -470,7 +498,7 @@
               </div>
               <div><div class="service-name">แพทย์แผนไทย</div><div class="service-desc" id="service_thai_desc">-</div></div>
             </div>
-            <div class="text-right"><div class="stat-val-red" style="font-size:26px;" id="service_thai_total">0</div><div class="stat-label">ราย</div></div>
+            <div class="text-right"><div class="stat-val-red" style="font-size:20px;" id="service_thai_total">0</div><div class="stat-label">ราย</div></div>
           </div>
 
           <div class="service-item">
@@ -480,7 +508,7 @@
               </div>
               <div><div class="service-name">ทันตกรรม</div><div class="service-desc" id="service_dental_desc">-</div></div>
             </div>
-            <div class="text-right"><div class="stat-val-red" style="font-size:26px;" id="service_dental_total">0</div><div class="stat-label">ราย</div></div>
+            <div class="text-right"><div class="stat-val-red" style="font-size:20px;" id="service_dental_total">0</div><div class="stat-label">ราย</div></div>
           </div>
         </div>
       </div>
@@ -497,13 +525,17 @@
         report_date: "กำลังโหลด...",
         ward_general_today: 0, ward_pakwan_today: 0, ward_general_total: 0, 
         ward_general_bed_current: 0, ward_general_bed_max: 100, ward_general_bed_today: 0,
+        ward_general_bed_fiscalyear: 0, ward_general_bed_max_fiscalyear: 100,
         ward_special_today: 0, ward_special_total: 0, 
         ward_special_bed_current: 0, ward_special_bed_max: 100, ward_special_bed_today: 0,
+        ward_special_bed_fiscalyear: 0, ward_special_bed_max_fiscalyear: 100,
         sum_ward_bed_current: 0, sum_ward_bed_max: 100, sum_ward_bed_today: 0,
-        right_gold_today: 0, right_gold_total: 0, right_gold_total_lastmonth: 0,
-        right_sso_today: 0, right_sso_total: 0, right_sso_total_lastmonth: 0,
-        right_uc_today: 0, right_uc_total: 0, right_uc_total_lastmonth: 0,
-        right_cash_today: 0, right_cash_total: 0, right_cash_total_lastmonth: 0,
+        sum_ward_bed_fiscalyear: 0, sum_ward_bed_max_fiscalyear: 100,
+        
+        right_gold_today: 0, right_gold_total: 0, right_gold_total_lastyear: 0,
+        right_sso_today: 0, right_sso_total: 0, right_sso_total_lastyear: 0,
+        right_uc_today: 0, right_uc_total: 0, right_uc_total_lastyear: 0,
+        right_cash_today: 0, right_cash_total: 0, right_cash_total_lastyear: 0,
         service_pt_total: 0, service_pt_desc: "-",
         service_thai_total: 0, service_thai_desc: "-",
         service_dental_total: 0, service_dental_desc: "-",
@@ -520,7 +552,7 @@
       document.getElementById('year').textContent = new Date().getFullYear() + 543;
 
       // Helper for updating comparison columns
-      function updateComparison(lastId, diffId, current, last) {
+      function updateComparison(lastId, diffId, current, last, isTotal = false) {
         const lastEl = document.getElementById(lastId);
         const diffEl = document.getElementById(diffId);
         
@@ -549,8 +581,8 @@
             const baseClass = diffId === 'diff_total' ? "change-cell-total" : "change-cell";
             
             // Render without font-size override in HTML, let CSS handle it
-            diffEl.innerHTML = `${sign}${pct.toFixed(1)}%`;
-            diffEl.className = `${baseClass} ${colorClass}`;
+            diffEl.innerHTML = `<span class="${colorClass}">${sign}${pct.toFixed(1)}%</span>`;
+            diffEl.className = `${baseClass}`;
         }
       }
 
@@ -613,13 +645,13 @@
         animateValue('total_rights_total', parseInt(elTotalTotal.textContent.replace(/,/g, ''))||0, totalRightTotal, 1000);
 
         // Comparisons
-        updateComparison('last_gold', 'diff_gold', data.right_gold_total, data.right_gold_total_lastmonth);
-        updateComparison('last_sso', 'diff_sso', data.right_sso_total, data.right_sso_total_lastmonth);
-        updateComparison('last_uc', 'diff_uc', data.right_uc_total, data.right_uc_total_lastmonth);
-        updateComparison('last_cash', 'diff_cash', data.right_cash_total, data.right_cash_total_lastmonth);
+        updateComparison('last_gold', 'diff_gold', data.right_gold_total, data.right_gold_total_lastyear);
+        updateComparison('last_sso', 'diff_sso', data.right_sso_total, data.right_sso_total_lastyear);
+        updateComparison('last_uc', 'diff_uc', data.right_uc_total, data.right_uc_total_lastyear);
+        updateComparison('last_cash', 'diff_cash', data.right_cash_total, data.right_cash_total_lastyear);
         
-        const totalLastMonth = Number(data.right_gold_total_lastmonth) + Number(data.right_sso_total_lastmonth) + Number(data.right_uc_total_lastmonth) + Number(data.right_cash_total_lastmonth);
-        updateComparison('last_total', 'diff_total', totalRightTotal, totalLastMonth);
+        const totalLastMonth = Number(data.right_gold_total_lastyear) + Number(data.right_sso_total_lastyear) + Number(data.right_uc_total_lastyear) + Number(data.right_cash_total_lastyear);
+        updateComparison('last_total', 'diff_total', totalRightTotal, totalLastMonth, true);
 
         // Percentages
         const genPct = (data.ward_general_total / WARD_GENERAL_TARGET) * 100;
@@ -640,14 +672,17 @@
         // General Bars
         updateBar('bar_gen_today', 'txt_gen_today', data.ward_general_bed_today, BED_GENERAL_MAX);
         updateBar('bar_gen_accum', 'txt_gen_accum', data.ward_general_bed_current, data.ward_general_bed_max);
+        updateBar('bar_gen_fiscal', 'txt_gen_fiscal', data.ward_general_bed_fiscalyear, data.ward_general_bed_max_fiscalyear);
 
         // Special Bars
         updateBar('bar_spec_today', 'txt_spec_today', data.ward_special_bed_today, BED_SPECIAL_MAX);
         updateBar('bar_spec_accum', 'txt_spec_accum', data.ward_special_bed_current, data.ward_special_bed_max);
+        updateBar('bar_spec_fiscal', 'txt_spec_fiscal', data.ward_special_bed_fiscalyear, data.ward_special_bed_max_fiscalyear);
 
         // Total Bars
         updateBar('bar_total_today', 'txt_total_today', data.sum_ward_bed_today, BED_TOTAL_MAX);
         updateBar('bar_total_accum', 'txt_total_accum', data.sum_ward_bed_current, data.sum_ward_bed_max);
+        updateBar('bar_total_fiscal', 'txt_total_fiscal', data.sum_ward_bed_fiscalyear, data.sum_ward_bed_max_fiscalyear);
       }
 
       // Fetch Logic
@@ -696,8 +731,11 @@
             
             // Validate Max
             if (newData.ward_general_bed_max === 0) newData.ward_general_bed_max = 1;
+            if (newData.ward_general_bed_max_fiscalyear === 0) newData.ward_general_bed_max_fiscalyear = 1;
             if (newData.ward_special_bed_max === 0) newData.ward_special_bed_max = 1;
+            if (newData.ward_special_bed_max_fiscalyear === 0) newData.ward_special_bed_max_fiscalyear = 1;
             if (newData.sum_ward_bed_max === 0) newData.sum_ward_bed_max = 1;
+            if (newData.sum_ward_bed_max_fiscalyear === 0) newData.sum_ward_bed_max_fiscalyear = 1;
 
             success = true;
             break;
