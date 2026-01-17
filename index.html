@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>รายงานบริการกลุ่มเป้าหมายเร่งรัด โรงพยาบาลกุสุมาลย์</title>
+    <!-- แก้ไข Title -->
+    <title>บริการกลุ่มเป้าหมายเร่งรัด โรงพยาบาลกุสุมาลย์</title>
     
     <!-- Google Fonts: Prompt Only -->
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -49,7 +50,7 @@
       * { box-sizing: border-box; }
       
       body { 
-        font-family: 'Prompt', sans-serif; /* ใช้ฟอนต์ Prompt ทั้งหมด */
+        font-family: 'Kanit', sans-serif; /* ใช้ฟอนต์ Kanit ทั้งหมด */
         background-color: var(--bg-body); 
         margin: 0; 
         padding: 16px;
@@ -262,7 +263,8 @@
         padding: 6px 12px; 
         background: #f9fafb; color: var(--text-muted); font-weight: 600;
         border-bottom: 2px solid var(--border-color);
-        font-size: 14px; 
+        font-size: 12px; 
+        border-top: none;
       }
       .table-clean th:first-child { text-align: left; padding-left: 12px; }
 
@@ -274,19 +276,26 @@
       }
       .table-clean tr:last-child td { border-bottom: none; }
       
+      /* Special Rows - Adjusted Total Row */
+      .row-total td { 
+        background-color: #fff7ed; /* Light Orange to match card accent */
+        font-weight: 700; 
+        border-top: 2px solid #fed7aa; 
+      }
+      
       /* Standardize Number Cells */
       .td-center { text-align: center; }
       .td-num { 
         font-weight: 600; 
         font-size: 14px !important; 
         color: var(--text-head); text-align: center; 
-        font-family: 'Prompt', sans-serif;
+        font-family: 'Kanit', sans-serif;
       }
       .td-total { 
         font-weight: 800; 
         font-size: 14px !important; 
         color: var(--color-danger); text-align: center; 
-        font-family: 'Prompt', sans-serif;
+        font-family: 'Kanit', sans-serif;
       }
       
       /* Change Badges */
@@ -303,7 +312,7 @@
       .change-cell-total { text-align: center; font-weight: 800; font-size: 14px !important; }
 
       @media (min-width: 1024px) {
-        .custom-table th { font-size: 14px; }
+        .custom-table th { font-size: 12px; } /* Override for desktop */
         .custom-table td { font-size: 14px; }
         .td-num { font-size: 14px !important; }
         .td-total { font-size: 14px !important; }
@@ -356,7 +365,8 @@
       <!-- Header -->
       <div class="header-card">
         <div class="header-content">
-          <h1 class="app-title">รายงานบริการกลุ่มเป้าหมายเร่งรัด</h1>
+          <!-- แก้ไข H1 Title -->
+          <h1 class="app-title">บริการกลุ่มเป้าหมายเร่งรัด</h1>
           <h2 class="app-subtitle">โรงพยาบาลกุสุมาลย์ จังหวัดสกลนคร ปีงบประมาณ พ.ศ. 2569</h2>
           
           <div class="update-badge">
@@ -424,6 +434,7 @@
                     <span>อัตราครองเตียงตึกสามัญ</span>
                     <span style="font-weight:400; color:var(--text-muted); font-size:12px;">เตียงจริง 36 เตียง</span>
                   </div>
+                  <!-- Bars -->
                   <div class="bar-item">
                     <div class="bar-name">วันนี้</div>
                     <div class="progress-bg">
@@ -624,7 +635,7 @@
                             <td class="td-center" style="padding-right:12px;" id="diff_uc">-</td>
                         </tr>
                          <tr>
-                            <td style="padding-left:12px; text-align:left;">ใบรับรองแพทย์ชำระเงินเอง</td>
+                            <td style="padding-left:12px; text-align:left;">ใบรับรองแพทย์ชำระเงิน</td>
                             <td class="td-center td-num count-up" id="cer_today">0</td>
                             <td class="td-center td-num count-up" id="cer_month">0</td>
                             <td class="td-center"><div class="td-num" style="font-weight:600;" id="cer_year">0</div></td>
@@ -670,7 +681,7 @@
                 <div class="service-list-item">
                     <div style="display:flex; align-items:center;">
                         <div class="svc-icon">
-                            <!-- PT Icon: Person Exercise -->
+                            <!-- PT Icon: Person Exercising/Stretching -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="5" r="1" />
                                 <path d="m9 20 3-6 3 6" />
@@ -692,12 +703,12 @@
                 <div class="service-list-item">
                     <div style="display:flex; align-items:center;">
                         <div class="svc-icon" style="background:#d1fae5; color:#059669;">
-                            <!-- Thai Med Icon: Sprout (Herbal) -->
+                            <!-- Thai Med Icon: Sprout/Herbs -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                              <path d="M7 20h10" />
-                              <path d="M10 20c5.5-2.5.8-6.4 3-10" />
-                              <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z" />
-                              <path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z" />
+                                <path d="M7 20h10" />
+                                <path d="M10 20c5.5-2.5.8-6.4 3-10" />
+                                <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z" />
+                                <path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z" />
                             </svg>
                         </div>
                         <div>
@@ -714,7 +725,7 @@
                 <div class="service-list-item" style="margin-bottom:0;">
                     <div style="display:flex; align-items:center;">
                         <div class="svc-icon" style="background:#ede9fe; color:#7c3aed;">
-                            <!-- Dental Icon: Laugh (Teeth) -->
+                            <!-- Dental Icon: Laughing Face -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="10"/>
                                 <path d="M18 13a6 6 0 0 1-6 5 6 6 0 0 1-6-5h12Z"/>
