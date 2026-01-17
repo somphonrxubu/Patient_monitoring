@@ -7,8 +7,8 @@
     <!-- แก้ไข Title -->
     <title>บริการกลุ่มเป้าหมายเร่งรัด โรงพยาบาลกุสุมาลย์</title>
     
-    <!-- Google Fonts: Prompt Only -->
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Kanit Only -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
       /* --- Public Health Design System --- */
@@ -263,8 +263,7 @@
         padding: 6px 12px; 
         background: #f9fafb; color: var(--text-muted); font-weight: 600;
         border-bottom: 2px solid var(--border-color);
-        font-size: 12px; 
-        border-top: none;
+        font-size: 14px; 
       }
       .table-clean th:first-child { text-align: left; padding-left: 12px; }
 
@@ -276,11 +275,11 @@
       }
       .table-clean tr:last-child td { border-bottom: none; }
       
-      /* Special Rows - Adjusted Total Row */
+      /* Special Rows */
       .row-total td { 
-        background-color: #fff7ed; /* Light Orange to match card accent */
+        background-color: #fff7ed; /* เปลี่ยนเป็นสีส้มอ่อน */
         font-weight: 700; 
-        border-top: 2px solid #fed7aa; 
+        border-top: 2px solid #fed7aa; /* เส้นขอบสีส้ม */
       }
       
       /* Standardize Number Cells */
@@ -312,7 +311,7 @@
       .change-cell-total { text-align: center; font-weight: 800; font-size: 14px !important; }
 
       @media (min-width: 1024px) {
-        .custom-table th { font-size: 12px; } /* Override for desktop */
+        .custom-table th { font-size: 14px; }
         .custom-table td { font-size: 14px; }
         .td-num { font-size: 14px !important; }
         .td-total { font-size: 14px !important; }
@@ -331,7 +330,7 @@
         width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
         background: var(--color-bg-warning); color: var(--color-warning); margin-right: 16px;
       }
-      .svc-val { font-size: 24px; font-weight: 600; color: var(--color-danger); }
+      .svc-val { font-family: 'Kanit', sans-serif; font-size: 24px; font-weight: 600; color: var(--color-danger); }
 
       /* Footer */
       .footer-section {
@@ -434,7 +433,6 @@
                     <span>อัตราครองเตียงตึกสามัญ</span>
                     <span style="font-weight:400; color:var(--text-muted); font-size:12px;">เตียงจริง 36 เตียง</span>
                   </div>
-                  <!-- Bars -->
                   <div class="bar-item">
                     <div class="bar-name">วันนี้</div>
                     <div class="progress-bg">
@@ -500,7 +498,6 @@
                     <span>อัตราครองเตียงตึกปุญโญภาส</span>
                     <span style="font-weight:400; color:var(--text-muted); font-size:12px;">เตียงจริง 6 เตียง</span>
                   </div>
-                  <!-- Bars -->
                   <div class="bar-item">
                     <div class="bar-name">วันนี้</div>
                     <div class="progress-bg">
