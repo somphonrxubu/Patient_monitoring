@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>รายงานบริการกลุ่มเป้าหมายเร่งรัด โรงพยาบาลกุสุมาลย์</title>
     
-    <!-- Google Fonts: Kanit Only -->
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Prompt Only -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
       /* --- Public Health Design System --- */
@@ -49,7 +49,7 @@
       * { box-sizing: border-box; }
       
       body { 
-        font-family: 'Kanit', sans-serif; /* ใช้ฟอนต์ Kanit ทั้งหมด */
+        font-family: 'Prompt', sans-serif; /* ใช้ฟอนต์ Prompt ทั้งหมด */
         background-color: var(--bg-body); 
         margin: 0; 
         padding: 16px;
@@ -280,13 +280,13 @@
         font-weight: 600; 
         font-size: 14px !important; 
         color: var(--text-head); text-align: center; 
-        font-family: 'Kanit', sans-serif;
+        font-family: 'Prompt', sans-serif;
       }
       .td-total { 
         font-weight: 800; 
         font-size: 14px !important; 
         color: var(--color-danger); text-align: center; 
-        font-family: 'Kanit', sans-serif;
+        font-family: 'Prompt', sans-serif;
       }
       
       /* Change Badges */
@@ -424,7 +424,6 @@
                     <span>อัตราครองเตียงตึกสามัญ</span>
                     <span style="font-weight:400; color:var(--text-muted); font-size:12px;">เตียงจริง 36 เตียง</span>
                   </div>
-                  <!-- Bars -->
                   <div class="bar-item">
                     <div class="bar-name">วันนี้</div>
                     <div class="progress-bg">
@@ -590,7 +589,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="padding-left:12px; text-align:left;">เบิกได้</td>
+                            <td style="padding-left:12px; text-align:left;">เบิกได้กรมบัญชีกลาง</td>
                             <td class="td-center td-num count-up" id="ofc_today">0</td>
                             <td class="td-center td-num count-up" id="ofc_month">0</td>
                             <td class="td-center"><div class="td-num" style="font-weight:600;" id="ofc_year">0</div></td>
@@ -671,11 +670,12 @@
                 <div class="service-list-item">
                     <div style="display:flex; align-items:center;">
                         <div class="svc-icon">
-                            <!-- PT Icon: Wheelchair -->
+                            <!-- PT Icon: Person Exercise -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="9" cy="5.5" r="2.5"/>
-                                <path d="M15 19l-2-6-3-1h-2v4h2"/>
-                                <path d="M9.5 20a5.5 5.5 0 1 1 5.5-5.5V15"/>
+                                <circle cx="12" cy="5" r="1" />
+                                <path d="m9 20 3-6 3 6" />
+                                <path d="m6 8 6 2 6-2" />
+                                <path d="M12 10v4" />
                             </svg>
                         </div>
                         <div>
