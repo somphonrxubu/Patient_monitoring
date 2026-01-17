@@ -331,7 +331,7 @@
         width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
         background: var(--color-bg-warning); color: var(--color-warning); margin-right: 16px;
       }
-      .svc-val { font-size: 24px; font-weight: 600; color: var(--color-danger); }
+      .svc-val { font-family: 'Kanit', sans-serif; font-size: 24px; font-weight: 600; color: var(--color-danger); }
 
       /* Footer */
       .footer-section {
@@ -605,6 +605,7 @@
                 <table class="table-clean">
                     <thead>
                         <tr>
+                            <!-- ปรับความกว้างคอลัมน์ให้เหมาะสม -->
                             <th style="padding-left:12px; text-align:left; width: 40%;">สิทธิการรักษา</th>
                             <th class="td-center" style="width: 15%;">วันนี้</th>
                             <th class="td-center" style="width: 15%;">เดือนนี้</th>
@@ -616,7 +617,7 @@
                         <tr>
                             <td style="padding-left:12px; text-align:left;">
                                 <div>เบิกได้กรมบัญชีกลาง</div>
-                                <!-- แก้ไขข้อความตามที่ระบุ (ลบวงเล็บออก) -->
+                                <!-- แก้ไข: ปรับขนาดเป็น 12px และลบวงเล็บออก -->
                                 <div style="font-size: 12px; color: #64748b;">EDC วันนี้ <span id="edc_today">0</span> คน <span id="edc_cast_today">0</span> บาท</div>
                             </td>
                             <td class="td-center td-num count-up" id="ofc_today">0</td>
@@ -631,6 +632,7 @@
                             <td class="td-center"><div class="td-num" style="font-weight:600;" id="lgo_year">0</div></td>
                             <td class="td-center" style="padding-right:12px;" id="diff_lgo">-</td>
                         </tr>
+                        <!-- Removed EDC Row as requested -->
                         <tr>
                             <td style="padding-left:12px; text-align:left;">ประกันสังคม</td>
                             <td class="td-center td-num count-up" id="sss_today">0</td>
@@ -859,6 +861,7 @@
           'service_pt_total', 'service_thai_total', 'service_dental_total',
           'ofc_today', 'ofc_month', 'ofc_year',
           'lgo_today', 'lgo_month', 'lgo_year',
+          // Added back edc fields for animation
           'edc_today', 'edc_cast_today',
           'sss_today', 'sss_month', 'sss_year',
           'uc_today', 'uc_month', 'uc_year',
@@ -875,7 +878,7 @@
           }
         });
 
-        // Sum Totals for Rights
+        // Sum Totals for Rights - Note: EDC removed from total sum logic as per previous instruction to remove the row
         const totalRightsToday = Number(data.ofc_today) + Number(data.lgo_today) + Number(data.sss_today) + Number(data.uc_today) + Number(data.cer_today) + Number(data.cast_today);
         const totalRightsMonth = Number(data.ofc_month) + Number(data.lgo_month) + Number(data.sss_month) + Number(data.uc_month) + Number(data.cer_month) + Number(data.cast_month);
         const totalRightsYear = Number(data.ofc_year) + Number(data.lgo_year) + Number(data.sss_year) + Number(data.uc_year) + Number(data.cer_year) + Number(data.cast_year);
