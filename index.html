@@ -4,524 +4,748 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>รายงานบริการกลุ่มเป้าหมายเร่งรัด โรงพยาบาลกุสุมาลย์ จังหวัดสกลนคร</title>
+    <title>รายงานบริการกลุ่มเป้าหมายเร่งรัด โรงพยาบาลกุสุมาลย์</title>
     
-    <!-- Google Fonts: Kanit Only (โหลดเฉพาะฟอนต์ที่จำเป็น) -->
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Kanit Only -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-      /* --- CSS Variables & Reset --- */
+      /* --- Public Health Design System --- */
       :root {
-        --primary-gradient: linear-gradient(135deg, #009688 0%, #006064 100%);
-        --bg-color: #F0F4F8;
-        --text-main: #333;
-        --text-muted: #64748b;
-        --card-bg: #ffffff;
-        --border-color: #e2e8f0;
+        /* Brand Colors: MOPH / Medical Tone */
+        --brand-primary: #007c68;     /* MOPH Green */
+        --brand-secondary: #005a4b;   /* Darker Green */
+        --brand-accent: #eab308;      /* Gold/Yellow for highlights */
         
-        /* Colors */
-        --blue-light: #eff6ff; --blue-text: #2563eb; --blue-border: #3b82f6;
-        --green-light: #ecfdf5; --green-text: #059669; --green-border: #10b981;
-        --red-text: #b91c1c;
-        --amber-icon: #f59e0b; --amber-bg: #fef3c7;
+        /* Functional Colors */
+        --color-success: #15803d;     /* Green 700 */
+        --color-bg-success: #dcfce7;  /* Green 100 */
+        --color-info: #0369a1;        /* Sky 700 */
+        --color-bg-info: #e0f2fe;     /* Sky 100 */
+        --color-warning: #b45309;     /* Amber 700 */
+        --color-bg-warning: #fef3c7;  /* Amber 100 */
+        --color-danger: #b91c1c;      /* Red 700 */
+        --color-bg-danger: #fee2e2;   /* Red 100 */
+        
+        /* Neutrals */
+        --bg-body: #f4f6f8;           /* Light Gray Background */
+        --bg-card: #ffffff;
+        --text-head: #111827;         /* Nearly Black */
+        --text-body: #374151;         /* Dark Gray */
+        --text-muted: #6b7280;        /* Medium Gray */
+        --border-color: #e5e7eb;
+        
+        /* Gradients */
+        --grad-primary: linear-gradient(135deg, #00947a 0%, #006d5b 100%);
+        --grad-bar-green: linear-gradient(90deg, #34d399 0%, #059669 100%);
+        --grad-bar-blue: linear-gradient(90deg, #60a5fa 0%, #2563eb 100%);
+        --grad-bar-purple: linear-gradient(90deg, #c084fc 0%, #9333ea 100%);
+        
+        /* Shadows */
+        --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+        --shadow-card: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
       }
 
       * { box-sizing: border-box; }
+      
       body { 
-        font-family: 'Kanit', sans-serif; 
-        background-color: var(--bg-color); 
-        margin: 0; padding: 10px;
-        color: var(--text-main);
-        line-height: 1.5;
+        font-family: 'Kanit', sans-serif; /* ใช้ฟอนต์ Kanit ทั้งหมด */
+        background-color: var(--bg-body); 
+        margin: 0; 
+        padding: 16px;
+        color: var(--text-body);
+        line-height: 1.6;
       }
 
-      @media (min-width: 640px) { body { padding: 20px; } }
+      @media (min-width: 640px) { body { padding: 24px; } }
 
-      /* --- Layout Utilities --- */
+      /* Layout */
       .container { 
-        width: 100%; max-width: 1200px; margin: 0 auto; 
+        width: 100%; max-width: 1400px; margin: 0 auto; 
         display: flex; flex-direction: column; gap: 20px; 
       }
       
-      .grid-responsive {
-        display: grid; grid-template-columns: 1fr; gap: 16px;
+      /* Grid System */
+      .grid-cols-2 {
+        display: grid; grid-template-columns: 1fr; gap: 20px;
       }
-      @media (min-width: 768px) { .grid-responsive { grid-template-columns: 1fr 1fr; } }
-
-      .flex { display: flex; }
-      .flex-col { flex-direction: column; }
-      .items-center { align-items: center; }
-      .justify-between { justify-content: space-between; }
-      .text-center { text-align: center; }
-      .text-right { text-align: right; }
-      .mb-2 { margin-bottom: 8px; }
-      .mb-3 { margin-bottom: 12px; }
-      .mb-4 { margin-bottom: 16px; }
-      .mt-2 { margin-top: 8px; }
-      .gap-2 { gap: 8px; }
-      .gap-4 { gap: 16px; }
-
-      /* --- Components --- */
-      .card {
-        background: var(--card-bg);
-        border-radius: 24px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        border: 1px solid var(--border-color);
-        transition: transform 0.2s, box-shadow 0.2s;
+      @media (min-width: 1024px) { 
+        .grid-cols-2 { grid-template-columns: 1fr 1fr; } /* 1:1 Ratio on desktop */
       }
-      .card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      
+      /* Flex Utilities */
+      .flex-col-stack {
+        display: flex; flex-direction: column; gap: 20px;
       }
 
-      /* Header */
-      .header-section {
-        background: var(--primary-gradient);
+      /* --- Header --- */
+      .header-card {
+        background: var(--grad-primary);
         color: white;
-        padding: 30px 20px;
-        border-radius: 24px;
+        border-radius: 12px;
+        padding: 24px;
+        position: relative;
+        box-shadow: 0 10px 15px -3px rgba(0, 124, 104, 0.3);
+        overflow: hidden;
+        border-bottom: 4px solid var(--brand-accent);
       }
-      .header-title { font-size: 20px; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.1); margin: 0; line-height: 1.3; }
-      .header-subtitle { font-size: 18px; font-weight: 700; margin-top: 8px; opacity: 0.95; }
+      
+      .header-card::before {
+        content: ""; position: absolute; top: -50px; right: -50px;
+        width: 200px; height: 200px;
+        background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+        border-radius: 50%; pointer-events: none;
+      }
+      .header-card::after {
+        content: ""; position: absolute; bottom: -80px; left: -20px;
+        width: 250px; height: 250px;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        border-radius: 50%; pointer-events: none;
+      }
+
+      .header-content { position: relative; z-index: 10; text-align: center; }
+      
+      .app-title { 
+        font-size: 24px; font-weight: 600; margin: 0; 
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .app-subtitle { 
+        font-size: 18px; font-weight: 500; margin-top: 4px; opacity: 0.95; 
+      }
+      
       @media (min-width: 768px) {
-        .header-title { font-size: 28px; }
-        .header-subtitle { font-size: 24px; }
+        .app-title { font-size: 32px; }
+        .app-subtitle { font-size: 22px; }
       }
 
-      .date-badge {
-        background: rgba(255,255,255,0.15);
-        backdrop-filter: blur(4px);
-        border: 1px solid rgba(255,255,255,0.2);
-        padding: 6px 16px;
-        border-radius: 50px;
-        font-size: 16px; font-weight: 300;
+      .update-badge {
         display: inline-flex; align-items: center; gap: 8px;
-        margin-top: 12px;
+        background: rgba(0,0,0,0.2);
+        padding: 6px 16px; border-radius: 20px;
+        margin-top: 4px; 
+        font-size: 14px;
+        border: 1px solid rgba(255,255,255,0.2);
       }
 
-      .refresh-btn {
-        background: transparent; border: none; color: rgba(255,255,255,0.8); 
-        cursor: pointer; padding: 0; display: flex; transition: transform 0.3s;
+      .refresh-icon-btn {
+        background: none; border: none; color: white; cursor: pointer; padding: 0;
+        display: flex; transition: transform 0.3s; opacity: 0.8;
       }
-      .refresh-btn:hover { color: white; transform: rotate(180deg); }
+      .refresh-icon-btn:hover { opacity: 1; transform: rotate(180deg); }
       .spin { animation: spin 1s linear infinite; }
       @keyframes spin { 100% { transform: rotate(360deg); } }
 
-      /* Ward Styling */
-      .ward-card { padding: 20px; border-left: 6px solid transparent; height: 100%; display: flex; flex-direction: column; }
-      .ward-blue { border-left-color: var(--blue-border); }
-      .ward-green { border-left-color: var(--green-border); }
+      /* --- Cards & Panels --- */
+      .card-panel {
+        background: var(--bg-card);
+        border-radius: 12px;
+        box-shadow: var(--shadow-card);
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+        display: flex; flex-direction: column;
+        height: 100%;
+      }
+      
+      .card-header {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border-color);
+        display: flex; align-items: center; gap: 12px;
+        background: #fcfcfc;
+      }
+      
+      /* Card Accents */
+      .accent-blue { border-top: 4px solid var(--color-info); }
+      .accent-green { border-top: 4px solid var(--color-success); }
+      .accent-orange { border-top: 4px solid var(--color-warning); }
 
-      .icon-circle {
-        width: 48px; height: 48px; border-radius: 50%;
+      .icon-wrapper {
+        width: 40px; height: 40px; border-radius: 8px;
         display: flex; align-items: center; justify-content: center;
-        margin-right: 12px; flex-shrink: 0;
+        flex-shrink: 0;
       }
-      .icon-circle.sm { width: 32px; height: 32px; margin-right: 10px; }
-      
-      .bg-blue-light { background-color: var(--blue-light); color: var(--blue-text); }
-      .bg-green-light { background-color: var(--green-light); color: var(--green-text); }
-      .bg-rose-light { background-color: #ffe4e6; color: #e11d48; }
-      .bg-amber-light { background-color: var(--amber-bg); color: #d97706; }
+      .bg-icon-blue { background: var(--color-bg-info); color: var(--color-info); }
+      .bg-icon-green { background: var(--color-bg-success); color: var(--color-success); }
+      .bg-icon-orange { background: var(--color-bg-warning); color: var(--color-warning); }
+      .bg-icon-red { background: var(--color-bg-danger); color: var(--color-danger); }
 
-      .stat-box {
-        background: #f8fafc; border: 1px solid var(--border-color);
-        border-radius: 12px; padding: 12px; text-align: center;
+      .card-label {
+        font-size: 18px; font-weight: 600; color: var(--text-head); line-height: 1.2;
       }
-      .stat-val { font-size: 36px; font-weight: 700; color: #333; line-height: 1; }
-      .stat-val-red { font-size: 28px; font-weight: 700; color: var(--red-text); line-height: 1; }
-      @media (min-width: 768px) { 
-        .stat-val { font-size: 56px; } 
-        .stat-val-red { font-size: 42px; }
-      }
-      .stat-label { font-size: 12px; color: var(--text-muted); font-weight: 500; margin-bottom: 4px; }
+      .card-desc { font-size: 13px; color: var(--text-muted); }
 
-      /* Progress Bars */
-      .occupancy-card { padding: 16px; background: white; }
+      .card-body { padding: 20px; flex: 1; }
+
+      /* Stat Blocks */
+      .stat-container {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;
+      }
+      .stat-block {
+        background: var(--bg-body); border-radius: 10px; padding: 12px;
+        text-align: center; border: 1px solid var(--border-color);
+      }
+      .stat-title { font-size: 13px; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; }
       
-      /* New class for integrated occupancy section */
-      .occupancy-internal {
-        margin-top: 24px;
-        padding-top: 20px;
-        border-top: 1px dashed var(--border-color);
+      .number-display-lg { font-size: 56px; font-weight: 600; color: var(--text-head); line-height: 1; }
+      .number-display-md { font-size: 40px; font-weight: 600; color: var(--color-danger); line-height: 1; }
+      
+      @media (min-width: 1280px) {
+        .number-display-lg { font-size: 72px; }
+        .number-display-md { font-size: 56px; }
+      }
+      
+      .unit-text { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+      /* Split Stat (Today) - Modified for Full Height Divider */
+      .split-row { 
+        display: flex; 
+        align-items: stretch; 
+        justify-content: center; 
+        gap: 16px; 
+      }
+      .split-col { 
+        text-align: center; 
+        flex: 1; 
+        display: flex; 
+        flex-direction: column; 
+        justify-content: space-between; 
+      }
+      .split-line { 
+        width: 1px; 
+        background: #d1d5db; 
+        margin: 4px 0; 
+      }
+      .split-head { font-size: 12px; color: var(--text-muted); margin-bottom: 2px; }
+
+      /* Goal Section */
+      .goal-section {
+        margin-top: 12px; padding-top: 12px; border-top: 1px dashed #d1d5db;
+        font-size: 13px; color: var(--text-muted); text-align: center;
+      }
+      .goal-val { font-weight: 600; font-size: 15px; display: block; margin-top: 4px; }
+
+      /* Occupancy Bar Styling */
+      .occupancy-box {
+        margin-top: 16px; padding-top: 16px;
+        border-top: none; 
+        background: transparent;
+      }
+      .occ-label { font-size: 14px; font-weight: 600; color: var(--text-head); display: flex; justify-content: space-between; margin-bottom: 12px; }
+      
+      .bar-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+      .bar-name { width: 45px; font-size: 12px; font-weight: 600; color: var(--text-muted); }
+      
+      .progress-bg {
+        flex: 1; height: 12px; background: #e5e7eb; border-radius: 6px; position: relative;
+      }
+      .progress-fg { height: 100%; border-radius: 6px; transition: width 1s ease; }
+      .grad-today { background: var(--grad-bar-green); }
+      .grad-month { background: var(--grad-bar-blue); }
+      .grad-year { background: var(--grad-bar-purple); }
+
+      /* Target Marker */
+      .target-marker {
+        position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--color-danger); z-index: 5;
+        left: 80%;
+      }
+      .target-text {
+        position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+        font-size: 10px; font-weight: 700; color: var(--color-danger); 
+        background: #fff; padding: 0 4px; border-radius: 2px;
+      }
+      
+      .bar-percent { width: 55px; text-align: right; font-weight: 700; font-size: 14px; font-family: 'Kanit', sans-serif; }
+
+      /* Table Design */
+      .table-clean { width: 100%; border-collapse: collapse; font-size: 14px; }
+      .table-clean th { 
+        text-align: center; /* Center header */
+        padding: 6px 12px; 
+        background: #f9fafb; color: var(--text-muted); font-weight: 600;
+        border-bottom: 2px solid var(--border-color);
+        font-size: 14px; 
+      }
+      .table-clean th:first-child { text-align: left; padding-left: 12px; }
+
+      .table-clean td { 
+        padding: 6px 12px; 
+        border-bottom: 1px solid #f3f4f6; 
+        vertical-align: middle; color: var(--text-body);
+        font-size: 14px; 
+      }
+      .table-clean tr:last-child td { border-bottom: none; }
+      
+      /* Standardize Number Cells */
+      .td-center { text-align: center; }
+      .td-num { 
+        font-weight: 600; 
+        font-size: 14px !important; 
+        color: var(--text-head); text-align: center; 
+        font-family: 'Kanit', sans-serif;
+      }
+      .td-total { 
+        font-weight: 800; 
+        font-size: 14px !important; 
+        color: var(--color-danger); text-align: center; 
+        font-family: 'Kanit', sans-serif;
+      }
+      
+      /* Change Badges */
+      .badge-change {
+        display: inline-block; padding: 0; border-radius: 0;
+        font-size: 14px !important; font-weight: 600; 
+        background-color: transparent !important;
+      }
+      .badge-pos { color: #15803d; } 
+      .badge-neg { color: #b91c1c; } 
+      .badge-neu { color: #6b7280; } 
+      
+      .change-cell { text-align: center; font-weight: 600; font-size: 14px !important; }
+      .change-cell-total { text-align: center; font-weight: 800; font-size: 14px !important; }
+
+      @media (min-width: 1024px) {
+        .custom-table th { font-size: 14px; }
+        .custom-table td { font-size: 14px; }
+        .td-num { font-size: 14px !important; }
+        .td-total { font-size: 14px !important; }
       }
 
-      .progress-bar-bg {
-        height: 16px; background: #f1f5f9; border-radius: 12px; overflow: hidden; position: relative;
-      }
-      .progress-bar-fill {
-        height: 100%; border-radius: 12px; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); width: 0%;
-      }
-      .target-line {
-        position: absolute; top: -4px; bottom: -4px; width: 2px; background-color: #b91c1c; z-index: 5;
-      }
-      .target-label {
-        position: absolute; top: -14px; font-size: 10px; color: #b91c1c; font-weight: bold; left: 50%; transform: translateX(-50%); white-space: nowrap;
-      }
-
-      /* Table */
-      .table-card { padding: 20px; }
-      .table-responsive { overflow-x: auto; }
-      .custom-table { width: 100%; border-collapse: collapse; min-width: 300px; }
-      .custom-table th { text-align: left; padding: 12px 8px; color: var(--text-muted); font-size: 12px; border-bottom: 2px solid #f1f5f9; }
-      .custom-table th.center { text-align: center; }
-      .custom-table td { padding: 12px 8px; border-bottom: 1px solid #f1f5f9; font-size: 14px; }
-      .custom-table tr:last-child td { border-bottom: none; font-weight: 700; background: #f8fafc; }
-      
-      .num-cell { text-align: center; font-weight: 700; font-size: 28px; } 
-      .change-cell { text-align: center; font-weight: 600; font-size: 18px; }
-      
-      .num-cell-total { text-align: center; font-weight: 800; font-size: 30px; color: #333; }
-      .change-cell-total { text-align: center; font-weight: 800; font-size: 30px; }
-
-      @media (min-width: 768px) {
-        .custom-table th { font-size: 13px; }
-        .custom-table td { font-size: 15px; }
-        .num-cell { font-size: 32px; } 
-        .num-cell-total, .change-cell-total { font-size: 36px; } 
-      }
-      .text-red { color: var(--red-text); }
-      .text-red-dark { color: #b91c1c; font-weight: 700; } 
-      .text-green-dark { color: #15803d; font-weight: 700; } 
-      
-      /* Services */
-      .service-item {
+      /* Service List */
+      .service-list-item {
         display: flex; align-items: center; justify-content: space-between;
-        padding: 16px; border: 1px solid var(--border-color); border-radius: 16px;
-        margin-bottom: 12px; cursor: pointer; transition: transform 0.2s;
+        padding: 16px; border: 1px solid var(--border-color);
+        border-radius: 12px; margin-bottom: 12px;
+        background: white; transition: all 0.2s;
       }
-      .service-item:hover { transform: translateX(4px); border-color: #cbd5e1; }
-      .service-icon { 
-        width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-        background: var(--amber-bg); color: var(--amber-icon); margin-right: 12px; flex-shrink: 0;
+      .service-list-item:hover { border-color: #cbd5e1; box-shadow: var(--shadow-sm); }
+      
+      .svc-icon {
+        width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+        background: var(--color-bg-warning); color: var(--color-warning); margin-right: 16px;
       }
-      .service-name { font-weight: 700; font-size: 15px; color: #333; }
-      .service-desc { font-size: 11px; color: var(--text-muted); }
-      @media (min-width: 768px) { .service-name { font-size: 16px; } }
+      .svc-val { font-size: 24px; font-weight: 600; color: var(--color-danger); }
 
       /* Footer */
-      .footer { text-align: center; color: var(--text-muted); font-size: 12px; padding: 10px 0 5px; font-weight: 300; }
-      .error-box { background: #fef2f2; color: #b91c1c; padding: 10px; border-radius: 8px; font-size: 12px; display: none; margin-top: 10px; text-align: center; }
+      .footer-section {
+        text-align: center; 
+        padding-top: 0; 
+        border-top: none; 
+        color: var(--text-muted); 
+        font-size: 13px; 
+        font-weight: 300; 
+        margin-top: 0; 
+        padding-bottom: 20px; 
+      }
+      
+      .error-alert {
+        background: #fef2f2; border: 1px solid #fecaca; color: #991b1b;
+        padding: 12px; border-radius: 8px; text-align: center; margin-top: 16px; display: none;
+      }
+
+      /* Helpers */
+      .text-red { color: var(--color-danger); }
+      .text-green { color: var(--color-success); }
+      .text-blue { color: var(--color-info); }
+      .text-red-dark { color: #b91c1c; font-weight: 700; } 
+      .text-green-dark { color: #15803d; font-weight: 700; } 
     </style>
   </head>
   <body>
 
     <div class="container">
+      
       <!-- Header -->
-      <div class="card header-section text-center">
-        <h1 class="header-title">รายงานบริการกลุ่มเป้าหมายเร่งรัด</h1>
-        <h2 class="header-subtitle">โรงพยาบาลกุสุมาลย์ จังหวัดสกลนคร ปีงบประมาณ พ.ศ. 2569</h2>
-        <div class="date-badge">
-          <span id="report_date">กำลังโหลด...</span>
-          <button id="refresh_btn" class="refresh-btn" onclick="fetchData(false)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
-          </button>
+      <div class="header-card">
+        <div class="header-content">
+          <h1 class="app-title">รายงานบริการกลุ่มเป้าหมายเร่งรัด</h1>
+          <h2 class="app-subtitle">โรงพยาบาลกุสุมาลย์ จังหวัดสกลนคร ปีงบประมาณ พ.ศ. 2569</h2>
+          
+          <div class="update-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span id="report_date">กำลังโหลด...</span>
+            <button id="refresh_btn" class="refresh-icon-btn" onclick="fetchData(false)" title="รีเฟรชข้อมูล">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+            </button>
+          </div>
         </div>
-        <div id="error_box" class="error-box"></div>
+        <div id="error_box" class="error-alert"></div>
       </div>
 
-      <!-- Wards -->
-      <div class="grid-responsive">
-        <!-- General Ward Card with Integrated Occupancy -->
-        <div class="card ward-card ward-blue">
-          <div class="flex items-center mb-4">
-            <div class="icon-circle bg-blue-light">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-            </div>
-            <div>
-              <div style="font-size:18px; font-weight:700;">หอผู้ป่วยสามัญ</div>
-              <div style="font-size:12px; color:var(--text-muted);">จำนวนผู้ป่วยที่เข้ารับการ Admit</div>
-            </div>
-          </div>
-          
-          <!-- Stats -->
-          <div class="grid-responsive" style="gap:10px;">
-            <div class="stat-box">
-              <div class="stat-label" style="color:var(--blue-text); margin-bottom:5px;">รายใหม่วันนี้</div>
-              <div style="display:flex; justify-content:center; align-items:baseline; gap:15px;">
-                <div style="flex:1; text-align:center; border-right:1px solid #e2e8f0;">
-                  <div style="font-size:12px; color:#64748b; margin-bottom:-5px;">สามัญ</div>
-                  <div class="stat-val count-up" id="ward_general_today">0</div>
-                  <div class="stat-label">ราย</div>
-                </div>
-                <div style="flex:1; text-align:center;">
-                  <div style="font-size:12px; color:#64748b; margin-bottom:-5px;">ผักหวาน</div>
-                  <div class="stat-val count-up" id="ward_pakwan_today">0</div>
-                  <div class="stat-label">ราย</div>
-                </div>
-              </div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-label">สะสมเดือนนี้</div>
-              <div class="stat-val-red count-up" id="ward_general_total">0</div>
-              <div class="stat-label">ราย</div>
-              <div style="margin-top:8px; padding-top:8px; border-top:1px solid #e2e8f0; font-size:13px; color:#64748b;">
-                <div>เป้าหมาย 360 ราย</div>
-                <div style="font-weight:700; color:var(--blue-text); font-size:15px;">คิดเป็น <span id="ward_general_percent">0.00</span>%</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Integrated Occupancy -->
-          <div class="occupancy-internal">
-            <div class="flex items-center mb-4">
-                <div class="icon-circle sm bg-blue-light">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      <!-- Main Stacked Layout -->
+      <div class="flex-col-stack">
+        
+        <!-- Row 1: Wards (2 Columns) -->
+        <div class="grid-cols-2">
+            
+            <!-- General Ward -->
+            <div class="card-panel accent-blue">
+              <div class="card-header" style="border-bottom: none;">
+                <div class="icon-wrapper bg-icon-blue">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
                 </div>
                 <div>
-                  <div style="font-weight:700; font-size:15px;">อัตราครองเตียงหอผู้ป่วยสามัญ</div>
-                  <div style="font-size:11px; color:var(--text-muted);">เตียงจริง 36 เตียง</div>
+                  <div class="card-label">หอผู้ป่วยสามัญ</div>
+                  <div class="card-desc">จำนวนผู้ป่วยที่เข้ารับการ Admit</div>
                 </div>
-            </div>
-            <!-- Today -->
-            <div class="flex items-center mb-3 gap-2">
-                <div style="width:35px; font-size:12px; font-weight:bold; color:#64748b;">วันนี้</div>
-                <div style="flex:1; position:relative; height:16px;">
-                  <div class="target-line" style="left:80%;"><div class="target-label">80%</div></div>
-                  <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar_gen_today" style="background:linear-gradient(90deg, #6ee7b7, #34d399);"></div></div>
+              </div>
+              <div class="card-body">
+                <div class="stat-container">
+                  <!-- Today -->
+                  <div class="stat-block">
+                    <div class="stat-title" style="color:var(--color-info);">รายใหม่วันนี้</div>
+                    <div class="split-row">
+                      <div class="split-col">
+                        <div class="split-head">สามัญ</div>
+                        <div class="number-display-lg count-up" id="ward_general_today">0</div>
+                        <div class="unit-text">ราย</div>
+                      </div>
+                      <div class="split-line"></div>
+                      <div class="split-col">
+                        <div class="split-head">ผักหวาน</div>
+                        <div class="number-display-lg count-up" id="ward_pakwan_today">0</div>
+                        <div class="unit-text">ราย</div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Accum -->
+                  <div class="stat-block">
+                    <div class="stat-title">สะสมเดือนนี้</div>
+                    <div class="number-display-md count-up" id="ward_general_total">0</div>
+                    <div class="unit-text">ราย</div>
+                    <div class="goal-section">
+                      <div>เป้าหมาย 360 ราย</div>
+                      <div class="goal-val text-blue">คิดเป็น <span id="ward_general_percent">0.0</span>%</div>
+                    </div>
+                  </div>
                 </div>
-                <div class="text-right" style="width:60px; font-size:20px; font-weight:bold; color:#10b981;"><span id="txt_gen_today">0.0</span>%</div>
-            </div>
-            <!-- Accum Month -->
-            <div class="flex items-center mb-3 gap-2">
-                <div style="width:35px; font-size:12px; font-weight:bold; color:#64748b;">เดือนนี้</div>
-                <div style="flex:1; position:relative; height:16px;">
-                  <div class="target-line" style="left:80%;"></div>
-                  <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar_gen_accum" style="background:linear-gradient(90deg, #93c5fd, #3b82f6);"></div></div>
-                </div>
-                <div class="text-right" style="width:60px; font-size:20px; font-weight:bold; color:#3b82f6;"><span id="txt_gen_accum">0.0</span>%</div>
-            </div>
-            <!-- Fiscal Year -->
-            <div class="flex items-center gap-2">
-                <div style="width:35px; font-size:12px; font-weight:bold; color:#64748b;">ปีงบนี้</div>
-                <div style="flex:1; position:relative; height:16px;">
-                  <div class="target-line" style="left:80%;"></div>
-                  <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar_gen_fiscal" style="background:linear-gradient(90deg, #d8b4fe, #a855f7);"></div></div>
-                </div>
-                <div class="text-right" style="width:60px; font-size:20px; font-weight:bold; color:#a855f7;"><span id="txt_gen_fiscal">0.0</span>%</div>
-            </div>
-          </div>
-        </div>
 
-        <!-- Special Ward Card with Integrated Occupancy -->
-        <div class="card ward-card ward-green">
-          <div class="flex items-center mb-4">
-            <div class="icon-circle bg-green-light">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
-            </div>
-            <div>
-              <div style="font-size:18px; font-weight:700;">หอผู้ป่วยปุญโญภาส</div>
-              <div style="font-size:12px; color:var(--text-muted);">จำนวนผู้ป่วยที่เข้ารับการ Admit</div>
-            </div>
-          </div>
-          
-          <!-- Stats -->
-          <div class="grid-responsive" style="gap:10px;">
-            <div class="stat-box">
-              <div class="stat-label" style="color:var(--green-text);">รายใหม่วันนี้</div>
-              <div class="stat-val count-up" id="ward_special_today">0</div>
-              <div class="stat-label">ราย</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-label">สะสมเดือนนี้</div>
-              <div class="stat-val-red count-up" id="ward_special_total">0</div>
-              <div class="stat-label">ราย</div>
-              <div style="margin-top:8px; padding-top:8px; border-top:1px solid #e2e8f0; font-size:13px; color:#64748b;">
-                <div>เป้าหมาย 60 ราย</div>
-                <div style="font-weight:700; color:var(--green-text); font-size:15px;">คิดเป็น <span id="ward_special_percent">0.00</span>%</div>
+                <!-- Occupancy General -->
+                <div class="occupancy-box">
+                  <div class="occ-label">
+                    <span>อัตราครองเตียงตึกสามัญ</span>
+                    <span style="font-weight:400; color:var(--text-muted); font-size:12px;">เตียงจริง 36 เตียง</span>
+                  </div>
+                  <!-- Bars -->
+                  <div class="bar-item">
+                    <div class="bar-name">วันนี้</div>
+                    <div class="progress-bg">
+                      <div class="target-marker" style="left:80%"><div class="target-text">80%</div></div>
+                      <div class="progress-fg grad-today" id="bar_gen_today"></div>
+                    </div>
+                    <div class="bar-percent text-green"><span id="txt_gen_today">0</span>%</div>
+                  </div>
+                  <div class="bar-item">
+                    <div class="bar-name">เดือนนี้</div>
+                    <div class="progress-bg">
+                      <div class="target-marker" style="left:80%"></div>
+                      <div class="progress-fg grad-month" id="bar_gen_accum"></div>
+                    </div>
+                    <div class="bar-percent text-blue"><span id="txt_gen_accum">0</span>%</div>
+                  </div>
+                  <div class="bar-item" style="margin-bottom:0;">
+                    <div class="bar-name">ปีงบนี้</div>
+                    <div class="progress-bg">
+                      <div class="target-marker" style="left:80%"></div>
+                      <div class="progress-fg grad-year" id="bar_gen_fiscal"></div>
+                    </div>
+                    <div class="bar-percent" style="color:#9333ea;"><span id="txt_gen_fiscal">0</span>%</div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Integrated Occupancy -->
-          <div class="occupancy-internal">
-            <div class="flex items-center mb-4">
-                <div class="icon-circle sm bg-green-light">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <!-- Special Ward -->
+            <div class="card-panel accent-green">
+              <div class="card-header" style="border-bottom: none;">
+                <div class="icon-wrapper bg-icon-green">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
                 </div>
                 <div>
-                  <div style="font-weight:700; font-size:15px;">อัตราครองเตียงหอผู้ป่วยปุญโญภาส</div>
-                  <div style="font-size:11px; color:var(--text-muted);">เตียงจริง 6 เตียง</div>
+                  <div class="card-label">หอผู้ป่วยปุญโญภาส</div>
+                  <div class="card-desc">จำนวนผู้ป่วยที่เข้ารับการ Admit</div>
                 </div>
-            </div>
-            <!-- Today -->
-            <div class="flex items-center mb-3 gap-2">
-                <div style="width:35px; font-size:12px; font-weight:bold; color:#64748b;">วันนี้</div>
-                <div style="flex:1; position:relative; height:16px;">
-                  <div class="target-line" style="left:80%;"><div class="target-label">80%</div></div>
-                  <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar_spec_today" style="background:linear-gradient(90deg, #6ee7b7, #34d399);"></div></div>
+              </div>
+              <div class="card-body">
+                <div class="stat-container">
+                  <!-- Today -->
+                  <div class="stat-block">
+                    <div class="stat-title" style="color:var(--color-success);">รายใหม่วันนี้</div>
+                    <div class="number-display-lg count-up" id="ward_special_today">0</div>
+                    <div class="unit-text">ราย</div>
+                  </div>
+                  <!-- Accum -->
+                  <div class="stat-block">
+                    <div class="stat-title">สะสมเดือนนี้</div>
+                    <div class="number-display-md count-up" id="ward_special_total">0</div>
+                    <div class="unit-text">ราย</div>
+                    <div class="goal-section">
+                      <div>เป้าหมาย 60 ราย</div>
+                      <div class="goal-val text-green">คิดเป็น <span id="ward_special_percent">0.0</span>%</div>
+                    </div>
+                  </div>
                 </div>
-                <div class="text-right" style="width:60px; font-size:20px; font-weight:bold; color:#10b981;"><span id="txt_spec_today">0.0</span>%</div>
-            </div>
-            <!-- Accum Month -->
-            <div class="flex items-center mb-3 gap-2">
-                <div style="width:35px; font-size:12px; font-weight:bold; color:#64748b;">เดือนนี้</div>
-                <div style="flex:1; position:relative; height:16px;">
-                  <div class="target-line" style="left:80%;"></div>
-                  <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar_spec_accum" style="background:linear-gradient(90deg, #93c5fd, #3b82f6);"></div></div>
-                </div>
-                <div class="text-right" style="width:60px; font-size:20px; font-weight:bold; color:#3b82f6;"><span id="txt_spec_accum">0.0</span>%</div>
-            </div>
-            <!-- Fiscal Year -->
-            <div class="flex items-center gap-2">
-                <div style="width:35px; font-size:12px; font-weight:bold; color:#64748b;">ปีงบนี้</div>
-                <div style="flex:1; position:relative; height:16px;">
-                  <div class="target-line" style="left:80%;"></div>
-                  <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar_spec_fiscal" style="background:linear-gradient(90deg, #d8b4fe, #a855f7);"></div></div>
-                </div>
-                <div class="text-right" style="width:60px; font-size:20px; font-weight:bold; color:#a855f7;"><span id="txt_spec_fiscal">0.0</span>%</div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Total Occupancy -->
-      <div class="card occupancy-card">
-        <div class="flex items-center mb-4">
-          <div class="icon-circle sm bg-blue-light">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          </div>
-          <div>
-            <div style="font-weight:700; font-size:16px;">อัตราครองเตียงรวม</div>
-            <div style="font-size:12px; color:var(--text-muted);">ตึกสามัญ + ตึกปุญโญภาส รวม 42 เตียง</div>
-          </div>
-        </div>
-        <!-- Today -->
-        <div class="flex items-center mb-3 gap-2">
-          <div style="width:35px; font-size:12px; font-weight:bold; color:#64748b;">วันนี้</div>
-          <div style="flex:1; position:relative; height:20px;">
-            <div class="target-line" style="left:80%; top:-4px; bottom:-4px;"><div class="target-label" style="top:-14px;">80%</div></div>
-            <div class="progress-bar-bg" style="height:20px;"><div class="progress-bar-fill" id="bar_total_today" style="background:linear-gradient(90deg, #6ee7b7, #34d399);"></div></div>
-          </div>
-          <div class="text-right" style="width:60px; font-size:20px; font-weight:bold; color:#10b981;"><span id="txt_total_today">0.0</span>%</div>
-        </div>
-        <!-- Accum Month -->
-        <div class="flex items-center mb-3 gap-2">
-          <div style="width:35px; font-size:12px; font-weight:bold; color:#64748b;">เดือนนี้</div>
-          <div style="flex:1; position:relative; height:20px;">
-            <div class="target-line" style="left:80%; top:-4px; bottom:-4px;"></div>
-            <div class="progress-bar-bg" style="height:20px;"><div class="progress-bar-fill" id="bar_total_accum" style="background:linear-gradient(90deg, #93c5fd, #3b82f6);"></div></div>
-          </div>
-          <div class="text-right" style="width:60px; font-size:20px; font-weight:bold; color:#3b82f6;"><span id="txt_total_accum">0.0</span>%</div>
-        </div>
-        <!-- Fiscal Year -->
-        <div class="flex items-center gap-2">
-            <div style="width:35px; font-size:12px; font-weight:bold; color:#64748b;">ปีงบนี้</div>
-            <div style="flex:1; position:relative; height:20px;">
-              <div class="target-line" style="left:80%; top:-4px; bottom:-4px;"></div>
-              <div class="progress-bar-bg" style="height:20px;"><div class="progress-bar-fill" id="bar_total_fiscal" style="background:linear-gradient(90deg, #d8b4fe, #a855f7);"></div></div>
+                <!-- Occupancy Special -->
+                <div class="occupancy-box">
+                  <div class="occ-label">
+                    <span>อัตราครองเตียงตึกปุญโญภาส</span>
+                    <span style="font-weight:400; color:var(--text-muted); font-size:12px;">เตียงจริง 6 เตียง</span>
+                  </div>
+                  <!-- Bars -->
+                  <div class="bar-item">
+                    <div class="bar-name">วันนี้</div>
+                    <div class="progress-bg">
+                      <div class="target-marker" style="left:80%"><div class="target-text">80%</div></div>
+                      <div class="progress-fg grad-today" id="bar_spec_today"></div>
+                    </div>
+                    <div class="bar-percent text-green"><span id="txt_spec_today">0</span>%</div>
+                  </div>
+                  <div class="bar-item">
+                    <div class="bar-name">เดือนนี้</div>
+                    <div class="progress-bg">
+                      <div class="target-marker" style="left:80%"></div>
+                      <div class="progress-fg grad-month" id="bar_spec_accum"></div>
+                    </div>
+                    <div class="bar-percent text-blue"><span id="txt_spec_accum">0</span>%</div>
+                  </div>
+                  <div class="bar-item" style="margin-bottom:0;">
+                    <div class="bar-name">ปีงบนี้</div>
+                    <div class="progress-bg">
+                      <div class="target-marker" style="left:80%"></div>
+                      <div class="progress-fg grad-year" id="bar_spec_fiscal"></div>
+                    </div>
+                    <div class="bar-percent" style="color:#9333ea;"><span id="txt_spec_fiscal">0</span>%</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="text-right" style="width:60px; font-size:20px; font-weight:bold; color:#a855f7;"><span id="txt_total_fiscal">0.0</span>%</div>
-          </div>
-      </div>
 
-      <!-- Rights & Services -->
-      <div class="grid-responsive">
-        <!-- Rights Table -->
-        <div class="card table-card">
-          <div class="flex items-center mb-2">
-            <div class="icon-circle sm bg-rose-light">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </div>
-            <div>
-              <div style="font-weight:700; font-size:16px;">จำนวนผู้ป่วยเข้ารับบริการแยกตามสิทธิ</div>
-              <div style="font-size:11px; color:var(--text-muted);">(ไม่รวมสิทธิ UC ในเขต)</div>
-            </div>
-          </div>
-          <div class="table-responsive">
-            <table class="custom-table">
-              <thead><tr><th>สิทธิการรักษา</th><th class="center">วันนี้</th><th class="center">เดือนนี้</th><th class="center">ปีที่แล้ว</th><th class="center">+/-</th></tr></thead>
-              <tbody>
-                <tr>
-                    <td>เบิกได้</td>
-                    <td class="num-cell count-up" id="right_gold_today">0</td>
-                    <td class="num-cell count-up" id="right_gold_total">0</td>
-                    <td class="num-cell" id="last_gold">0</td>
-                    <td class="change-cell" id="diff_gold">-</td>
-                </tr>
-                <tr>
-                    <td>ประกันสังคม</td>
-                    <td class="num-cell count-up" id="right_sso_today">0</td>
-                    <td class="num-cell count-up" id="right_sso_total">0</td>
-                    <td class="num-cell" id="last_sso">0</td>
-                    <td class="change-cell" id="diff_sso">-</td>
-                </tr>
-                <tr>
-                    <td>UC นอกเขต</td>
-                    <td class="num-cell count-up" id="right_uc_today">0</td>
-                    <td class="num-cell count-up" id="right_uc_total">0</td>
-                    <td class="num-cell" id="last_uc">0</td>
-                    <td class="change-cell" id="diff_uc">-</td>
-                </tr>
-                <tr>
-                    <td>ชำระเงินเอง</td>
-                    <td class="num-cell count-up" id="right_cash_today">0</td>
-                    <td class="num-cell count-up" id="right_cash_total">0</td>
-                    <td class="num-cell" id="last_cash">0</td>
-                    <td class="change-cell" id="diff_cash">-</td>
-                </tr>
-                <tr>
-                    <td>รวมทั้งหมด</td>
-                    <td class="num-cell-total count-up" id="total_rights_today">0</td>
-                    <td class="num-cell-total count-up" id="total_rights_total">0</td>
-                    <td class="num-cell-total" id="last_total">0</td>
-                    <td class="change-cell-total" id="diff_total">-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
         </div>
 
-        <!-- Services -->
-        <div class="card table-card" style="display:flex; flex-direction:column;">
-          <div class="flex items-center mb-4">
-            <div class="icon-circle sm bg-amber-light">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-            </div>
-            <div style="font-weight:700; font-size:16px;">ข้อมูลผู้ป่วยแยกตามบริการ</div>
-          </div>
+        <!-- Row 2: Total Occupancy (Full Width) -->
+        <div class="card-panel accent-blue" style="padding:20px;">
+             <!-- เพิ่ม Header พร้อม Icon -->
+             <div class="card-header" style="border-bottom: none; padding: 0 0 16px 0; background: transparent;">
+                <div class="icon-wrapper bg-icon-blue">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+                </div>
+                <div>
+                   <div class="card-label">อัตราครองเตียงรวม</div>
+                   <div class="card-desc">ตึกสามัญ + ตึกปุญโญภาส รวม 42 เตียง</div>
+                </div>
+             </div>
+             
+             <div style="display:flex; flex-direction:column; gap:12px;">
+                <div class="bar-item">
+                    <div class="bar-name" style="font-size:13px;">วันนี้</div>
+                    <div class="progress-bg" style="height:20px;">
+                        <div class="target-marker" style="left:80%"><div class="target-text">80%</div></div>
+                        <div class="progress-fg grad-today" id="bar_total_today"></div>
+                    </div>
+                    <div class="bar-percent text-green" style="font-size:18px;"><span id="txt_total_today">0</span>%</div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-name" style="font-size:13px;">เดือนนี้</div>
+                    <div class="progress-bg" style="height:20px;">
+                        <div class="target-marker" style="left:80%"></div>
+                        <div class="progress-fg grad-month" id="bar_total_accum"></div>
+                    </div>
+                    <div class="bar-percent text-blue" style="font-size:18px;"><span id="txt_total_accum">0</span>%</div>
+                </div>
+                <div class="bar-item" style="margin-bottom:0;">
+                    <div class="bar-name" style="font-size:13px;">ปีงบนี้</div>
+                    <div class="progress-bg" style="height:20px;">
+                        <div class="target-marker" style="left:80%"></div>
+                        <div class="progress-fg grad-year" id="bar_total_fiscal"></div>
+                    </div>
+                    <div class="bar-percent" style="font-size:18px; color:#9333ea;"><span id="txt_total_fiscal">0</span>%</div>
+                </div>
+             </div>
+        </div>
+
+        <!-- Row 3: Rights & Services (2 Columns) -->
+        <div class="grid-cols-2">
           
-          <div class="service-item">
-            <div class="flex items-center">
-              <div class="service-icon" style="background:#ffedd5; color:#ea580c;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1" /><path d="m9 20 3-6 3 6" /><path d="m6 8 6 2 6-2" /><path d="M12 10v4" /></svg>
-              </div>
-              <div><div class="service-name">กายภาพบำบัด</div><div class="service-desc" id="service_pt_desc">-</div></div>
-            </div>
-            <div class="text-right"><div class="stat-val-red" style="font-size:26px;" id="service_pt_total">0</div><div class="stat-label">ราย</div></div>
+          <!-- Left: Rights Table -->
+          <div class="card-panel accent-orange">
+             <div class="card-header" style="border-bottom: none;">
+                <div class="icon-wrapper bg-icon-red">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                </div>
+                <div>
+                   <div class="card-label">ผู้ป่วยนอกแยกตามสิทธิ</div>
+                   <div class="card-desc">ไม่รวมสิทธิ UC ในเขต</div>
+                </div>
+             </div>
+             
+             <div style="padding: 10px 24px 24px 24px; overflow-x:auto;">
+                <table class="table-clean">
+                    <thead>
+                        <tr>
+                            <th style="padding-left:12px; text-align:left;">สิทธิการรักษา</th>
+                            <th class="td-center">วันนี้</th>
+                            <th class="td-center">เดือนนี้</th>
+                            <th class="td-center">ปีที่แล้ว</th>
+                            <th class="td-center" style="padding-right:12px;">+/-</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding-left:12px; text-align:left;">เบิกได้</td>
+                            <td class="td-center td-num count-up" id="ofc_today">0</td>
+                            <td class="td-center td-num count-up" id="ofc_month">0</td>
+                            <td class="td-center"><div class="td-num" style="font-weight:600;" id="ofc_year">0</div></td>
+                            <td class="td-center" style="padding-right:12px;" id="diff_ofc">-</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:12px; text-align:left;">เบิกได้ อปท.</td>
+                            <td class="td-center td-num count-up" id="lgo_today">0</td>
+                            <td class="td-center td-num count-up" id="lgo_month">0</td>
+                            <td class="td-center"><div class="td-num" style="font-weight:600;" id="lgo_year">0</div></td>
+                            <td class="td-center" style="padding-right:12px;" id="diff_lgo">-</td>
+                        </tr>
+                         <tr>
+                            <td style="padding-left:12px; text-align:left;">รูด EDC</td>
+                            <td class="td-center td-num count-up" id="edc_today">0</td>
+                            <td class="td-center td-num count-up" id="edc_month">0</td>
+                            <td class="td-center"><div class="td-num" style="font-weight:600;" id="edc_year">0</div></td>
+                            <td class="td-center" style="padding-right:12px;" id="diff_edc">-</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:12px; text-align:left;">ประกันสังคม</td>
+                            <td class="td-center td-num count-up" id="sss_today">0</td>
+                            <td class="td-center td-num count-up" id="sss_month">0</td>
+                            <td class="td-center"><div class="td-num" style="font-weight:600;" id="sss_year">0</div></td>
+                            <td class="td-center" style="padding-right:12px;" id="diff_sss">-</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:12px; text-align:left;">UC นอกเขต</td>
+                            <td class="td-center td-num count-up" id="uc_today">0</td>
+                            <td class="td-center td-num count-up" id="uc_month">0</td>
+                            <td class="td-center"><div class="td-num" style="font-weight:600;" id="uc_year">0</div></td>
+                            <td class="td-center" style="padding-right:12px;" id="diff_uc">-</td>
+                        </tr>
+                         <tr>
+                            <td style="padding-left:12px; text-align:left;">ใบรับรองแพทย์ชำระเงินเอง</td>
+                            <td class="td-center td-num count-up" id="cer_today">0</td>
+                            <td class="td-center td-num count-up" id="cer_month">0</td>
+                            <td class="td-center"><div class="td-num" style="font-weight:600;" id="cer_year">0</div></td>
+                            <td class="td-center" style="padding-right:12px;" id="diff_cer">-</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:12px; text-align:left;">ชำระเงินเอง</td>
+                            <td class="td-center td-num count-up" id="cast_today">0</td>
+                            <td class="td-center td-num count-up" id="cast_month">0</td>
+                            <td class="td-center"><div class="td-num" style="font-weight:600;" id="cast_year">0</div></td>
+                            <td class="td-center" style="padding-right:12px;" id="diff_cast">-</td>
+                        </tr>
+                        <tr class="row-total">
+                            <td style="padding-left:12px; text-align:left;">รวมทั้งหมด</td>
+                            <td class="td-center td-total count-up" id="total_rights_today">0</td>
+                            <td class="td-center td-total count-up" id="total_rights_month">0</td>
+                            <td class="td-center"><div class="td-total" style="color:#333;" id="total_rights_year">0</div></td>
+                            <td class="td-center" style="padding-right:12px;" id="diff_total">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+             </div>
           </div>
 
-          <div class="service-item">
-            <div class="flex items-center">
-              <div class="service-icon" style="background:#ccfbf1; color:#0d9488;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10" /><path d="M10 20c5.5-2.5.8-6.4 3-10" /><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z" /><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z" /></svg>
-              </div>
-              <div><div class="service-name">แพทย์แผนไทย</div><div class="service-desc" id="service_thai_desc">-</div></div>
-            </div>
-            <div class="text-right"><div class="stat-val-red" style="font-size:26px;" id="service_thai_total">0</div><div class="stat-label">ราย</div></div>
+          <!-- Right: Services List -->
+          <div class="card-panel accent-orange">
+             <div class="card-header" style="border-bottom: none;">
+                <div class="icon-wrapper bg-icon-orange">
+                    <!-- Medical Kit Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M19 7h-3V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                      <path d="M9 14h6"/>
+                      <path d="M12 11v6"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="card-label">ผู้ป่วยนอกแยกตามบริการ</div>
+                    <div class="card-desc">รวม <span id="service_total_sum">0</span> ราย</div>
+                </div>
+             </div>
+             
+             <div class="card-body">
+                <div class="service-list-item">
+                    <div style="display:flex; align-items:center;">
+                        <div class="svc-icon">
+                            <!-- PT Icon: Wheelchair -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="5.5" r="2.5"/>
+                                <path d="M15 19l-2-6-3-1h-2v4h2"/>
+                                <path d="M9.5 20a5.5 5.5 0 1 1 5.5-5.5V15"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div style="font-weight:700; font-size:16px;">กายภาพบำบัด</div>
+                            <div style="font-size:12px; color:#6b7280;" id="service_pt_desc">-</div>
+                        </div>
+                    </div>
+                    <div style="text-align:right;">
+                        <div class="svc-val count-up" id="service_pt_total">0</div>
+                        <div style="font-size:12px; color:#6b7280;">ราย</div>
+                    </div>
+                </div>
+
+                <div class="service-list-item">
+                    <div style="display:flex; align-items:center;">
+                        <div class="svc-icon" style="background:#d1fae5; color:#059669;">
+                            <!-- Thai Med Icon: Sprout (Herbal) -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M7 20h10" />
+                              <path d="M10 20c5.5-2.5.8-6.4 3-10" />
+                              <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z" />
+                              <path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div style="font-weight:700; font-size:16px;">แพทย์แผนไทย</div>
+                            <div style="font-size:12px; color:#6b7280;" id="service_thai_desc">-</div>
+                        </div>
+                    </div>
+                    <div style="text-align:right;">
+                        <div class="svc-val count-up" id="service_thai_total">0</div>
+                        <div style="font-size:12px; color:#6b7280;">ราย</div>
+                    </div>
+                </div>
+
+                <div class="service-list-item" style="margin-bottom:0;">
+                    <div style="display:flex; align-items:center;">
+                        <div class="svc-icon" style="background:#ede9fe; color:#7c3aed;">
+                            <!-- Dental Icon: Laugh (Teeth) -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M18 13a6 6 0 0 1-6 5 6 6 0 0 1-6-5h12Z"/>
+                                <line x1="9" x2="9.01" y1="9" y2="9"/>
+                                <line x1="15" x2="15.01" y1="9" y2="9"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div style="font-weight:700; font-size:16px;">ทันตกรรม</div>
+                            <div style="font-size:12px; color:#6b7280;" id="service_dental_desc">-</div>
+                        </div>
+                    </div>
+                    <div style="text-align:right;">
+                        <div class="svc-val count-up" id="service_dental_total">0</div>
+                        <div style="font-size:12px; color:#6b7280;">ราย</div>
+                    </div>
+                </div>
+             </div>
           </div>
 
-          <div class="service-item">
-            <div class="flex items-center">
-              <div class="service-icon" style="background:#f3e8ff; color:#9333ea;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
-              </div>
-              <div><div class="service-name">ทันตกรรม</div><div class="service-desc" id="service_dental_desc">-</div></div>
-            </div>
-            <div class="text-right"><div class="stat-val-red" style="font-size:26px;" id="service_dental_total">0</div><div class="stat-label">ราย</div></div>
-          </div>
         </div>
+
       </div>
 
-      <div class="footer">
+      <div class="footer-section">
         <div>&copy; <span id="year">2025</span> งานเวชระเบียนและสถิติ โรงพยาบาลกุสุมาลย์</div>
       </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- Scripts (Same Logic) -->
     <script>
-      // Initial Data Structure
       const INITIAL_DATA = {
         report_date: "กำลังโหลด...",
         ward_general_today: 0, ward_pakwan_today: 0, ward_general_total: 0, 
@@ -532,16 +756,21 @@
         ward_special_bed_fiscalyear: 0, ward_special_bed_max_fiscalyear: 100,
         sum_ward_bed_current: 0, sum_ward_bed_max: 100, sum_ward_bed_today: 0,
         sum_ward_bed_fiscalyear: 0, sum_ward_bed_max_fiscalyear: 100,
-        right_gold_today: 0, right_gold_total: 0, right_gold_total_lastyear: 0,
-        right_sso_today: 0, right_sso_total: 0, right_sso_total_lastyear: 0,
-        right_uc_today: 0, right_uc_total: 0, right_uc_total_lastyear: 0,
-        right_cash_today: 0, right_cash_total: 0, right_cash_total_lastyear: 0,
+        
+        // Rights Data
+        ofc_today: 0, ofc_month: 0, ofc_year: 0,
+        lgo_today: 0, lgo_month: 0, lgo_year: 0,
+        edc_today: 0, edc_month: 0, edc_year: 0,
+        sss_today: 0, sss_month: 0, sss_year: 0,
+        uc_today: 0, uc_month: 0, uc_year: 0,
+        cer_today: 0, cer_month: 0, cer_year: 0,
+        cast_today: 0, cast_month: 0, cast_year: 0,
+        
         service_pt_total: 0, service_pt_desc: "-",
         service_thai_total: 0, service_thai_desc: "-",
         service_dental_total: 0, service_dental_desc: "-",
       };
 
-      // Constants
       const GOOGLE_SHEET_URL = `https://docs.google.com/spreadsheets/d/e/2PACX-1vR7DyM-fjpAo5aqi-MKqngTkZsHMMtzkaH11PoS8S29FNvea62BeM2qcYdpkOAFUGNV-bMT1tCT3CfU/pub?gid=0&single=true&output=csv`;
       const WARD_GENERAL_TARGET = 360;
       const WARD_SPECIAL_TARGET = 60;
@@ -551,7 +780,6 @@
 
       document.getElementById('year').textContent = new Date().getFullYear() + 543;
 
-      // Helper for updating comparison columns
       function updateComparison(lastId, diffId, current, last, isTotal = false) {
         const lastEl = document.getElementById(lastId);
         const diffEl = document.getElementById(diffId);
@@ -559,34 +787,21 @@
         const lastVal = Number(last) || 0;
         const currentVal = Number(current) || 0;
 
-        // Set Last Month Value (with commas)
         lastEl.textContent = lastVal.toLocaleString();
 
-        // Calculate and Set % Diff
         if (lastVal === 0) {
-            diffEl.textContent = "N/A";
-            // Check if it's the total row to assign correct class
-            if(diffId === 'diff_total') {
-                diffEl.className = "change-cell-total";
-            } else {
-                diffEl.className = "change-cell";
-            }
+            diffEl.innerHTML = `<span class="badge-change badge-neu">N/A</span>`;
         } else {
             const diff = currentVal - lastVal;
             const pct = (diff / lastVal) * 100;
             const sign = pct > 0 ? "+" : "";
-            const colorClass = pct > 0 ? "text-green-dark" : (pct < 0 ? "text-red-dark" : "text-gray-500");
+            const cls = pct > 0 ? "badge-pos" : (pct < 0 ? "badge-neg" : "badge-neu");
             
-            // Adjust class based on row type (normal vs total)
-            const baseClass = diffId === 'diff_total' ? "change-cell-total" : "change-cell";
-            
-            // Render without font-size override in HTML, let CSS handle it
-            diffEl.innerHTML = `<span class="${colorClass}">${sign}${pct.toFixed(1)}%</span>`;
-            diffEl.className = `${baseClass}`;
+            const sizeStyle = isTotal ? "font-size:16px; padding:6px 14px;" : "";
+            diffEl.innerHTML = `<span class="badge-change ${cls}" style="${sizeStyle}">${sign}${pct.toFixed(1)}%</span>`;
         }
       }
 
-      // Animate Value with Commas
       function animateValue(id, start, end, duration) {
         if (start === end) return;
         const obj = document.getElementById(id);
@@ -595,97 +810,100 @@
         const step = (timestamp) => {
           if (!startTimestamp) startTimestamp = timestamp;
           const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-          const ease = 1 - Math.pow(2, -10 * progress); // EaseOutExpo
+          const ease = 1 - Math.pow(2, -10 * progress);
           const val = Math.floor(start + (end - start) * ease);
-          obj.innerHTML = val.toLocaleString(); // Add commas
+          obj.innerHTML = val.toLocaleString();
           if (progress < 1) {
             window.requestAnimationFrame(step);
           } else {
-            obj.innerHTML = end.toLocaleString(); // Add commas
+            obj.innerHTML = end.toLocaleString();
           }
         };
         window.requestAnimationFrame(step);
       }
 
-      // Update UI
       function renderDashboard(data) {
-        // Simple Fields
         document.getElementById('report_date').textContent = "ข้อมูล ณ วันที่ " + data.report_date;
         ['service_pt_desc', 'service_thai_desc', 'service_dental_desc'].forEach(k => {
           document.getElementById(k).textContent = data[k];
         });
 
-        // Animated Fields
         const numFields = [
           'ward_general_today', 'ward_pakwan_today', 'ward_general_total',
           'ward_special_today', 'ward_special_total',
           'service_pt_total', 'service_thai_total', 'service_dental_total',
-          'right_gold_today', 'right_gold_total',
-          'right_sso_today', 'right_sso_total',
-          'right_uc_today', 'right_uc_total',
-          'right_cash_today', 'right_cash_total'
+          'ofc_today', 'ofc_month', 'ofc_year',
+          'lgo_today', 'lgo_month', 'lgo_year',
+          'edc_today', 'edc_month', 'edc_year',
+          'sss_today', 'sss_month', 'sss_year',
+          'uc_today', 'uc_month', 'uc_year',
+          'cer_today', 'cer_month', 'cer_year',
+          'cast_today', 'cast_month', 'cast_year'
         ];
         
         numFields.forEach(id => {
           const el = document.getElementById(id);
-          // Remove commas before parsing
           const current = parseInt(el.textContent.replace(/,/g, '')) || 0;
           const target = parseInt(data[id]) || 0;
           animateValue(id, current, target, 1000);
         });
 
-        // Totals
-        const totalRightToday = Number(data.right_gold_today) + Number(data.right_sso_today) + Number(data.right_uc_today) + Number(data.right_cash_today);
-        const totalRightTotal = Number(data.right_gold_total) + Number(data.right_sso_total) + Number(data.right_uc_total) + Number(data.right_cash_total);
-        
+        // Sum Totals for Rights
+        const totalRightsToday = Number(data.ofc_today) + Number(data.lgo_today) + Number(data.edc_today) + Number(data.sss_today) + Number(data.uc_today) + Number(data.cer_today) + Number(data.cast_today);
+        const totalRightsMonth = Number(data.ofc_month) + Number(data.lgo_month) + Number(data.edc_month) + Number(data.sss_month) + Number(data.uc_month) + Number(data.cer_month) + Number(data.cast_month);
+        const totalRightsYear = Number(data.ofc_year) + Number(data.lgo_year) + Number(data.edc_year) + Number(data.sss_year) + Number(data.uc_year) + Number(data.cer_year) + Number(data.cast_year);
+
         const elTotalToday = document.getElementById('total_rights_today');
-        animateValue('total_rights_today', parseInt(elTotalToday.textContent.replace(/,/g, ''))||0, totalRightToday, 1000);
+        animateValue('total_rights_today', parseInt(elTotalToday.textContent.replace(/,/g, ''))||0, totalRightsToday, 1000);
         
-        const elTotalTotal = document.getElementById('total_rights_total');
-        animateValue('total_rights_total', parseInt(elTotalTotal.textContent.replace(/,/g, ''))||0, totalRightTotal, 1000);
-
+        const elTotalMonth = document.getElementById('total_rights_month');
+        animateValue('total_rights_month', parseInt(elTotalMonth.textContent.replace(/,/g, ''))||0, totalRightsMonth, 1000);
+        
         // Comparisons
-        updateComparison('last_gold', 'diff_gold', data.right_gold_total, data.right_gold_total_lastyear);
-        updateComparison('last_sso', 'diff_sso', data.right_sso_total, data.right_sso_total_lastyear);
-        updateComparison('last_uc', 'diff_uc', data.right_uc_total, data.right_uc_total_lastyear);
-        updateComparison('last_cash', 'diff_cash', data.right_cash_total, data.right_cash_total_lastyear);
+        updateComparison('ofc_year', 'diff_ofc', data.ofc_month, data.ofc_year);
+        updateComparison('lgo_year', 'diff_lgo', data.lgo_month, data.lgo_year);
+        updateComparison('edc_year', 'diff_edc', data.edc_month, data.edc_year);
+        updateComparison('sss_year', 'diff_sss', data.sss_month, data.sss_year);
+        updateComparison('uc_year', 'diff_uc', data.uc_month, data.uc_year);
+        updateComparison('cer_year', 'diff_cer', data.cer_month, data.cer_year);
+        updateComparison('cast_year', 'diff_cast', data.cast_month, data.cast_year);
         
-        const totalLastMonth = Number(data.right_gold_total_lastyear) + Number(data.right_sso_total_lastyear) + Number(data.right_uc_total_lastyear) + Number(data.right_cash_total_lastyear);
-        updateComparison('last_total', 'diff_total', totalRightTotal, totalLastMonth, true);
+        updateComparison('total_rights_year', 'diff_total', totalRightsMonth, totalRightsYear, true);
 
-        // Percentages
+        // Calculate and animate Service Total
+        const totalServiceToday = Number(data.service_pt_total) + Number(data.service_thai_total) + Number(data.service_dental_total);
+        const elServiceTotal = document.getElementById('service_total_sum');
+        // Parse current content, removing commas
+        const currentServiceTotal = parseInt(elServiceTotal.textContent.replace(/,/g, '')) || 0;
+        animateValue('service_total_sum', currentServiceTotal, totalServiceToday, 1000);
+
         const genPct = (data.ward_general_total / WARD_GENERAL_TARGET) * 100;
         document.getElementById('ward_general_percent').textContent = genPct.toFixed(2);
         
         const specPct = (data.ward_special_total / WARD_SPECIAL_TARGET) * 100;
         document.getElementById('ward_special_percent').textContent = specPct.toFixed(2);
 
-        // Bars
-        const updateBar = (barId, txtId, current, max) => {
-          let pct = (current / max) * 100;
-          if (max === 0) pct = 0;
-          pct = Math.min(Math.max(pct, 0), 100);
-          document.getElementById(barId).style.width = `${pct}%`;
+        const updateBar = (barId, txtId, pctValue) => {
+          let pct = pctValue;
+          if (isNaN(pct) || !isFinite(pct)) pct = 0;
+          const displayPct = Math.min(Math.max(pct, 0), 100);
+          document.getElementById(barId).style.width = `${displayPct}%`;
           document.getElementById(txtId).textContent = pct.toFixed(1);
         };
 
-        // General Bars
-        updateBar('bar_gen_today', 'txt_gen_today', data.ward_general_bed_today, BED_GENERAL_MAX);
-        updateBar('bar_gen_accum', 'txt_gen_accum', data.ward_general_bed_current, data.ward_general_bed_max);
-        updateBar('bar_gen_fiscal', 'txt_gen_fiscal', data.ward_general_bed_fiscalyear, data.ward_general_bed_max_fiscalyear);
-
-        // Special Bars
-        updateBar('bar_spec_today', 'txt_spec_today', data.ward_special_bed_today, BED_SPECIAL_MAX);
-        updateBar('bar_spec_accum', 'txt_spec_accum', data.ward_special_bed_current, data.ward_special_bed_max);
-        updateBar('bar_spec_fiscal', 'txt_spec_fiscal', data.ward_special_bed_fiscalyear, data.ward_special_bed_max_fiscalyear);
-
-        // Total Bars
-        updateBar('bar_total_today', 'txt_total_today', data.sum_ward_bed_today, BED_TOTAL_MAX);
-        updateBar('bar_total_accum', 'txt_total_accum', data.sum_ward_bed_current, data.sum_ward_bed_max);
-        updateBar('bar_total_fiscal', 'txt_total_fiscal', data.sum_ward_bed_fiscalyear, data.sum_ward_bed_max_fiscalyear);
+        updateBar('bar_gen_today', 'txt_gen_today', (data.ward_general_bed_today * 100) / 36);
+        updateBar('bar_gen_accum', 'txt_gen_accum', (data.ward_general_bed_current * 100) / data.ward_general_bed_max);
+        updateBar('bar_gen_fiscal', 'txt_gen_fiscal', (data.ward_general_bed_fiscalyear * 100) / data.ward_general_bed_max_fiscalyear);
+        
+        updateBar('bar_spec_today', 'txt_spec_today', (data.ward_special_bed_today * 100) / 6);
+        updateBar('bar_spec_accum', 'txt_spec_accum', (data.ward_special_bed_current * 100) / data.ward_special_bed_max);
+        updateBar('bar_spec_fiscal', 'txt_spec_fiscal', (data.ward_special_bed_fiscalyear * 100) / data.ward_special_bed_max_fiscalyear);
+        
+        updateBar('bar_total_today', 'txt_total_today', (data.sum_ward_bed_today * 100) / 42);
+        updateBar('bar_total_accum', 'txt_total_accum', (data.sum_ward_bed_current * 100) / data.sum_ward_bed_max);
+        updateBar('bar_total_fiscal', 'txt_total_fiscal', (data.sum_ward_bed_fiscalyear * 100) / data.sum_ward_bed_max_fiscalyear);
       }
 
-      // Fetch Logic
       async function fetchData(isAuto) {
         const btn = document.getElementById('refresh_btn');
         const errBox = document.getElementById('error_box');
@@ -706,7 +924,7 @@
         for (const url of proxies) {
           try {
             const controller = new AbortController();
-            const id = setTimeout(() => controller.abort(), 3000); // 3s timeout
+            const id = setTimeout(() => controller.abort(), 3000); 
             const response = await fetch(`${url}&t=${Date.now()}`, { signal: controller.signal });
             clearTimeout(id);
             
@@ -720,16 +938,16 @@
                 const key = r[0]?.trim();
                 const val = r[1]?.trim().replace(/['"]+/g, '');
                 if (key && newData.hasOwnProperty(key)) {
-                  newData[key] = isNaN(Number(val)) ? val : Number(val);
+                  // Ensure commas are removed before storing
+                  const numValue = val.replace(/,/g, '');
+                  newData[key] = isNaN(Number(numValue)) ? val : Number(numValue);
                 }
-                // Handle text fields
                 if(['report_date', 'service_pt_desc', 'service_thai_desc', 'service_dental_desc'].includes(key)) {
                    newData[key] = r[1]?.trim().replace(/['"]+/g, '');
                 }
               }
             });
             
-            // Validate Max
             if (newData.ward_general_bed_max === 0) newData.ward_general_bed_max = 1;
             if (newData.ward_general_bed_max_fiscalyear === 0) newData.ward_general_bed_max_fiscalyear = 1;
             if (newData.ward_special_bed_max === 0) newData.ward_special_bed_max = 1;
@@ -753,18 +971,14 @@
         if(!isAuto) btn.querySelector('svg').classList.remove('spin');
       }
 
-      // Init
-      (() => {
-        // Load cache immediately
+      document.addEventListener('DOMContentLoaded', () => {
         const cached = localStorage.getItem('ksm_dashboard_native');
         if (cached) {
           renderDashboard(JSON.parse(cached));
         }
-        // Then fetch
         fetchData(true);
-        // Interval
         setInterval(() => fetchData(true), 30000);
-      })();
+      });
     </script>
   </body>
 </html>
