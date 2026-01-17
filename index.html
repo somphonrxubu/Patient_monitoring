@@ -226,6 +226,7 @@
       /* Occupancy Bar Styling (Integrated Mode) */
       .occupancy-box {
         margin-top: 20px; padding-top: 20px;
+        /* ปรับแก้: ลบเส้นขอบด้านบนออก */
         border-top: none;
         background: transparent;
       }
@@ -262,16 +263,16 @@
         padding: 6px 12px; /* ลด Padding จาก 8px เหลือ 6px */
         background: #f9fafb; color: var(--text-muted); font-weight: 600;
         border-bottom: 2px solid var(--border-color);
-        font-size: 12px; 
+        font-size: 14px; /* Force 14px */
         border-top: none;
       }
       .table-clean th:first-child { text-align: left; padding-left: 12px; }
 
       .table-clean td { 
-        padding: 6px 12px; 
+        padding: 6px 12px; /* ลด Padding จาก 8px เหลือ 6px */
         border-bottom: 1px solid #f3f4f6; 
         vertical-align: middle; color: var(--text-body);
-        font-size: 14px; 
+        font-size: 14px; /* Force 14px */
       }
       .table-clean tr:last-child td { border-bottom: none; }
       
@@ -279,13 +280,13 @@
       .td-center { text-align: center; }
       .td-num { 
         font-weight: 600; 
-        font-size: 14px !important; 
+        font-size: 14px !important; /* Force Fixed 14px */
         color: var(--text-head); text-align: center; 
         font-family: 'Kanit', sans-serif;
       }
       .td-total { 
         font-weight: 800; 
-        font-size: 14px !important; 
+        font-size: 14px !important; /* Force Fixed 14px */
         color: var(--color-danger); text-align: center; 
         font-family: 'Kanit', sans-serif;
       }
@@ -304,7 +305,7 @@
       .change-cell-total { text-align: center; font-weight: 800; font-size: 14px !important; }
 
       @media (min-width: 1024px) {
-        .custom-table th { font-size: 12px; } /* Override for desktop */
+        .custom-table th { font-size: 14px; }
         .custom-table td { font-size: 14px; }
         .td-num { font-size: 14px !important; }
         .td-total { font-size: 14px !important; }
@@ -438,9 +439,8 @@
                 <div class="occupancy-box">
                   <div class="occ-label">
                     <span>อัตราครองเตียงตึกสามัญ</span>
-                    <span style="font-weight:400; color:var(--text-muted); font-size:12px;">เตียงจริง 36 เตียง</span>
+                    <!-- ลบข้อความ "เตียงจริง 36 เตียง" -->
                   </div>
-                  <!-- Bars -->
                   <div class="bar-item">
                     <div class="bar-name">วันนี้</div>
                     <div class="progress-bg">
@@ -511,7 +511,7 @@
                 <div class="occupancy-box">
                   <div class="occ-label">
                     <span>อัตราครองเตียงตึกปุญโญภาส</span>
-                    <span style="font-weight:400; color:var(--text-muted); font-size:12px;">เตียงจริง 6 เตียง</span>
+                    <!-- ลบข้อความ "เตียงจริง 6 เตียง" -->
                   </div>
                   <!-- Bars -->
                   <div class="bar-item">
@@ -604,11 +604,11 @@
                 <table class="table-clean">
                     <thead>
                         <tr>
-                            <th style="padding-left:12px; text-align:left;">สิทธิการรักษา</th>
-                            <th class="td-center">วันนี้</th>
-                            <th class="td-center">เดือนนี้</th>
-                            <th class="td-center">ปีที่แล้ว</th>
-                            <th class="td-center" style="padding-right:12px;">+/-</th>
+                            <th style="padding-left:12px; text-align:left; width: 40%;">สิทธิการรักษา</th>
+                            <th class="td-center" style="width: 15%;">วันนี้</th>
+                            <th class="td-center" style="width: 15%;">เดือนนี้</th>
+                            <th class="td-center" style="width: 15%;">ปีที่แล้ว</th>
+                            <th class="td-center" style="padding-right:12px; width: 15%;">+/-</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -630,7 +630,6 @@
                             <td class="td-center"><div class="td-num" style="font-weight:600;" id="lgo_year">0</div></td>
                             <td class="td-center" style="padding-right:12px;" id="diff_lgo">-</td>
                         </tr>
-                        <!-- Removed EDC Row as requested -->
                         <tr>
                             <td style="padding-left:12px; text-align:left;">ประกันสังคม</td>
                             <td class="td-center td-num count-up" id="sss_today">0</td>
@@ -692,12 +691,11 @@
                 <div class="service-list-item">
                     <div style="display:flex; align-items:center;">
                         <div class="svc-icon">
-                            <!-- PT Icon: Person Exercising/Stretching -->
+                            <!-- PT Icon: Person Running/Exercising -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="5" r="1" />
-                                <path d="m9 20 3-6 3 6" />
-                                <path d="m6 8 6 2 6-2" />
-                                <path d="M12 10v4" />
+                                <path d="M18 20.42V14.5a3 3 0 0 0-1.07-2.33l-2.07-1.74a3 3 0 0 1-1.02-2.19V6.09l1.45.69a1.5 1.5 0 1 0 1.25-2.76l-2.82-1.32A2.5 2.5 0 0 0 10.65 4l-2.07 4.14a2.5 2.5 0 0 0 1.34 3.36l1.24.41L10 16v6"/>
+                                <circle cx="14.5" cy="4" r="1.5"/>
+                                <path d="M4 22h16"/>
                             </svg>
                         </div>
                         <div>
@@ -714,12 +712,11 @@
                 <div class="service-list-item">
                     <div style="display:flex; align-items:center;">
                         <div class="svc-icon" style="background:#d1fae5; color:#059669;">
-                            <!-- Thai Med Icon: Sprout/Herbs -->
+                            <!-- Thai Med Icon: Herbs/Leaf -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M7 20h10" />
-                                <path d="M10 20c5.5-2.5.8-6.4 3-10" />
-                                <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z" />
-                                <path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z" />
+                                <path d="M12 11c0-4.5 1.5-6.5 5-8 0 0-1.5 4.5 0 8"/>
+                                <path d="M4 19c0-5 2.5-12 8-15 0 0 4 3.5 1 11"/>
+                                <path d="M11 15c-3 2.5-5.5 3-7.5 4"/>
                             </svg>
                         </div>
                         <div>
@@ -736,7 +733,7 @@
                 <div class="service-list-item" style="margin-bottom:0;">
                     <div style="display:flex; align-items:center;">
                         <div class="svc-icon" style="background:#ede9fe; color:#7c3aed;">
-                            <!-- Dental Icon: Laughing Face -->
+                            <!-- Dental Icon: Laugh (Teeth) -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="10"/>
                                 <path d="M18 13a6 6 0 0 1-6 5 6 6 0 0 1-6-5h12Z"/>
@@ -782,7 +779,8 @@
         // Rights Data
         ofc_today: 0, ofc_month: 0, ofc_year: 0,
         lgo_today: 0, lgo_month: 0, lgo_year: 0,
-        edc_today: 0, edc_cast_today: 0, 
+        // Added edc back as per latest request
+        edc_today: 0, edc_cast_today: 0, // Note: edc_cast_today is new for the subtitle
         sss_today: 0, sss_month: 0, sss_year: 0,
         uc_today: 0, uc_month: 0, uc_year: 0,
         cer_today: 0, cer_month: 0, cer_year: 0,
