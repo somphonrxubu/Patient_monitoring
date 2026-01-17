@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- แก้ไข Title -->
     <title>บริการกลุ่มเป้าหมายเร่งรัด โรงพยาบาลกุสุมาลย์</title>
     
     <!-- Google Fonts: Kanit Only -->
@@ -224,15 +223,15 @@
       }
       .goal-val { font-weight: 600; font-size: 15px; display: block; margin-top: 4px; }
 
-      /* Occupancy Bar Styling */
+      /* Occupancy Bar Styling (Integrated Mode) */
       .occupancy-box {
-        margin-top: 16px; padding-top: 16px;
-        border-top: none; 
+        margin-top: 20px; padding-top: 20px;
+        border-top: none;
         background: transparent;
       }
       .occ-label { font-size: 14px; font-weight: 600; color: var(--text-head); display: flex; justify-content: space-between; margin-bottom: 12px; }
       
-      .bar-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+      .bar-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
       .bar-name { width: 45px; font-size: 12px; font-weight: 600; color: var(--text-muted); }
       
       .progress-bg {
@@ -260,10 +259,11 @@
       .table-clean { width: 100%; border-collapse: collapse; font-size: 14px; }
       .table-clean th { 
         text-align: center; /* Center header */
-        padding: 6px 12px; 
+        padding: 6px 12px; /* ลด Padding จาก 8px เหลือ 6px */
         background: #f9fafb; color: var(--text-muted); font-weight: 600;
         border-bottom: 2px solid var(--border-color);
-        font-size: 14px; 
+        font-size: 12px; 
+        border-top: none;
       }
       .table-clean th:first-child { text-align: left; padding-left: 12px; }
 
@@ -274,13 +274,6 @@
         font-size: 14px; 
       }
       .table-clean tr:last-child td { border-bottom: none; }
-      
-      /* Special Rows */
-      .row-total td { 
-        background-color: #fff7ed; /* เปลี่ยนเป็นสีส้มอ่อน */
-        font-weight: 700; 
-        border-top: 2px solid #fed7aa; /* เส้นขอบสีส้ม */
-      }
       
       /* Standardize Number Cells */
       .td-center { text-align: center; }
@@ -311,10 +304,17 @@
       .change-cell-total { text-align: center; font-weight: 800; font-size: 14px !important; }
 
       @media (min-width: 1024px) {
-        .custom-table th { font-size: 14px; }
+        .custom-table th { font-size: 12px; } /* Override for desktop */
         .custom-table td { font-size: 14px; }
         .td-num { font-size: 14px !important; }
         .td-total { font-size: 14px !important; }
+      }
+      
+      /* Special Rows */
+      .row-total td { 
+        background-color: #fff7ed; /* เปลี่ยนเป็นสีส้มอ่อน */
+        font-weight: 700; 
+        border-top: 2px solid #fed7aa; /* เส้นขอบสีส้ม */
       }
 
       /* Service List */
@@ -393,7 +393,8 @@
                 </div>
                 <div>
                   <div class="card-label">หอผู้ป่วยสามัญ</div>
-                  <div class="card-desc">จำนวนผู้ป่วยที่เข้ารับการ Admit</div>
+                  <!-- แก้ไขข้อความรอง -->
+                  <div class="card-desc">จำนวนเตียงทั้งหมด 36 เตียง</div>
                 </div>
               </div>
               <div class="card-body">
@@ -414,6 +415,12 @@
                         <div class="unit-text">ราย</div>
                       </div>
                     </div>
+                    <!-- แก้ไขข้อความ และดึงข้อมูลใหม่ -->
+                    <div style="margin-top: 12px; text-align: center;">
+                        <span style="background-color: #e0f2fe; color: #0369a1; padding: 4px 12px; border-radius: 8px; font-size: 14px; font-weight: 500;">
+                            ยอดวันนี้ <span id="ward_general_occupied_text" style="font-weight: 700;">0</span> เตียง
+                        </span>
+                    </div>
                   </div>
                   <!-- Accum -->
                   <div class="stat-block">
@@ -433,6 +440,7 @@
                     <span>อัตราครองเตียงตึกสามัญ</span>
                     <span style="font-weight:400; color:var(--text-muted); font-size:12px;">เตียงจริง 36 เตียง</span>
                   </div>
+                  <!-- Bars -->
                   <div class="bar-item">
                     <div class="bar-name">วันนี้</div>
                     <div class="progress-bg">
@@ -469,7 +477,8 @@
                 </div>
                 <div>
                   <div class="card-label">หอผู้ป่วยปุญโญภาส</div>
-                  <div class="card-desc">จำนวนผู้ป่วยที่เข้ารับการ Admit</div>
+                  <!-- แก้ไขข้อความรอง -->
+                  <div class="card-desc">จำนวนเตียงทั้งหมด 6 เตียง</div>
                 </div>
               </div>
               <div class="card-body">
@@ -479,6 +488,12 @@
                     <div class="stat-title" style="color:var(--color-success);">รายใหม่วันนี้</div>
                     <div class="number-display-lg count-up" id="ward_special_today">0</div>
                     <div class="unit-text">ราย</div>
+                    <!-- เพิ่มส่วนแสดงยอดวันนี้ พื้นหลังสีเขียวอ่อน -->
+                    <div style="margin-top: 12px; text-align: center;">
+                        <span style="background-color: #dcfce7; color: #15803d; padding: 4px 12px; border-radius: 8px; font-size: 14px; font-weight: 500;">
+                            ยอดวันนี้ <span id="ward_special_bed_today_text" style="font-weight: 700;">0</span> เตียง
+                        </span>
+                    </div>
                   </div>
                   <!-- Accum -->
                   <div class="stat-block">
@@ -498,6 +513,7 @@
                     <span>อัตราครองเตียงตึกปุญโญภาส</span>
                     <span style="font-weight:400; color:var(--text-muted); font-size:12px;">เตียงจริง 6 เตียง</span>
                   </div>
+                  <!-- Bars -->
                   <div class="bar-item">
                     <div class="bar-name">วันนี้</div>
                     <div class="progress-bg">
@@ -597,7 +613,11 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="padding-left:12px; text-align:left;">เบิกได้กรมบัญชีกลาง</td>
+                            <td style="padding-left:12px; text-align:left;">
+                                <div>เบิกได้กรมบัญชีกลาง</div>
+                                <!-- แก้ไขข้อความตามที่ระบุ (ลบ | ออก) -->
+                                <div style="font-size: 12px; color: #64748b;">(EDC วันนี้ <span id="edc_today">0</span> คน <span id="edc_cast_today">0</span> บาท)</div>
+                            </td>
                             <td class="td-center td-num count-up" id="ofc_today">0</td>
                             <td class="td-center td-num count-up" id="ofc_month">0</td>
                             <td class="td-center"><div class="td-num" style="font-weight:600;" id="ofc_year">0</div></td>
@@ -610,13 +630,7 @@
                             <td class="td-center"><div class="td-num" style="font-weight:600;" id="lgo_year">0</div></td>
                             <td class="td-center" style="padding-right:12px;" id="diff_lgo">-</td>
                         </tr>
-                         <tr>
-                            <td style="padding-left:12px; text-align:left;">รูด EDC</td>
-                            <td class="td-center td-num count-up" id="edc_today">0</td>
-                            <td class="td-center td-num count-up" id="edc_month">0</td>
-                            <td class="td-center"><div class="td-num" style="font-weight:600;" id="edc_year">0</div></td>
-                            <td class="td-center" style="padding-right:12px;" id="diff_edc">-</td>
-                        </tr>
+                        <!-- Removed EDC Row as requested -->
                         <tr>
                             <td style="padding-left:12px; text-align:left;">ประกันสังคม</td>
                             <td class="td-center td-num count-up" id="sss_today">0</td>
@@ -768,7 +782,7 @@
         // Rights Data
         ofc_today: 0, ofc_month: 0, ofc_year: 0,
         lgo_today: 0, lgo_month: 0, lgo_year: 0,
-        edc_today: 0, edc_month: 0, edc_year: 0,
+        edc_today: 0, edc_cast_today: 0, 
         sss_today: 0, sss_month: 0, sss_year: 0,
         uc_today: 0, uc_month: 0, uc_year: 0,
         cer_today: 0, cer_month: 0, cer_year: 0,
@@ -792,6 +806,8 @@
         const lastEl = document.getElementById(lastId);
         const diffEl = document.getElementById(diffId);
         
+        if (!lastEl || !diffEl) return;
+
         const lastVal = Number(last) || 0;
         const currentVal = Number(current) || 0;
 
@@ -833,7 +849,7 @@
       function renderDashboard(data) {
         document.getElementById('report_date').textContent = "ข้อมูล ณ วันที่ " + data.report_date;
         ['service_pt_desc', 'service_thai_desc', 'service_dental_desc'].forEach(k => {
-          document.getElementById(k).textContent = data[k];
+          if(document.getElementById(k)) document.getElementById(k).textContent = data[k];
         });
 
         const numFields = [
@@ -842,7 +858,7 @@
           'service_pt_total', 'service_thai_total', 'service_dental_total',
           'ofc_today', 'ofc_month', 'ofc_year',
           'lgo_today', 'lgo_month', 'lgo_year',
-          'edc_today', 'edc_month', 'edc_year',
+          'edc_today', 'edc_cast_today',
           'sss_today', 'sss_month', 'sss_year',
           'uc_today', 'uc_month', 'uc_year',
           'cer_today', 'cer_month', 'cer_year',
@@ -851,26 +867,27 @@
         
         numFields.forEach(id => {
           const el = document.getElementById(id);
-          const current = parseInt(el.textContent.replace(/,/g, '')) || 0;
-          const target = parseInt(data[id]) || 0;
-          animateValue(id, current, target, 1000);
+          if (el) {
+            const current = parseInt(el.textContent.replace(/,/g, '')) || 0;
+            const target = parseInt(data[id]) || 0;
+            animateValue(id, current, target, 1000);
+          }
         });
 
-        // Sum Totals for Rights
-        const totalRightsToday = Number(data.ofc_today) + Number(data.lgo_today) + Number(data.edc_today) + Number(data.sss_today) + Number(data.uc_today) + Number(data.cer_today) + Number(data.cast_today);
-        const totalRightsMonth = Number(data.ofc_month) + Number(data.lgo_month) + Number(data.edc_month) + Number(data.sss_month) + Number(data.uc_month) + Number(data.cer_month) + Number(data.cast_month);
-        const totalRightsYear = Number(data.ofc_year) + Number(data.lgo_year) + Number(data.edc_year) + Number(data.sss_year) + Number(data.uc_year) + Number(data.cer_year) + Number(data.cast_year);
+        // Sum Totals for Rights - Note: EDC removed from total sum logic as per previous instruction to remove the row
+        const totalRightsToday = Number(data.ofc_today) + Number(data.lgo_today) + Number(data.sss_today) + Number(data.uc_today) + Number(data.cer_today) + Number(data.cast_today);
+        const totalRightsMonth = Number(data.ofc_month) + Number(data.lgo_month) + Number(data.sss_month) + Number(data.uc_month) + Number(data.cer_month) + Number(data.cast_month);
+        const totalRightsYear = Number(data.ofc_year) + Number(data.lgo_year) + Number(data.sss_year) + Number(data.uc_year) + Number(data.cer_year) + Number(data.cast_year);
 
         const elTotalToday = document.getElementById('total_rights_today');
-        animateValue('total_rights_today', parseInt(elTotalToday.textContent.replace(/,/g, ''))||0, totalRightsToday, 1000);
+        if(elTotalToday) animateValue('total_rights_today', parseInt(elTotalToday.textContent.replace(/,/g, ''))||0, totalRightsToday, 1000);
         
         const elTotalMonth = document.getElementById('total_rights_month');
-        animateValue('total_rights_month', parseInt(elTotalMonth.textContent.replace(/,/g, ''))||0, totalRightsMonth, 1000);
+        if(elTotalMonth) animateValue('total_rights_month', parseInt(elTotalMonth.textContent.replace(/,/g, ''))||0, totalRightsMonth, 1000);
         
         // Comparisons
         updateComparison('ofc_year', 'diff_ofc', data.ofc_month, data.ofc_year);
         updateComparison('lgo_year', 'diff_lgo', data.lgo_month, data.lgo_year);
-        updateComparison('edc_year', 'diff_edc', data.edc_month, data.edc_year);
         updateComparison('sss_year', 'diff_sss', data.sss_month, data.sss_year);
         updateComparison('uc_year', 'diff_uc', data.uc_month, data.uc_year);
         updateComparison('cer_year', 'diff_cer', data.cer_month, data.cer_year);
@@ -881,22 +898,46 @@
         // Calculate and animate Service Total
         const totalServiceToday = Number(data.service_pt_total) + Number(data.service_thai_total) + Number(data.service_dental_total);
         const elServiceTotal = document.getElementById('service_total_sum');
-        // Parse current content, removing commas
-        const currentServiceTotal = parseInt(elServiceTotal.textContent.replace(/,/g, '')) || 0;
-        animateValue('service_total_sum', currentServiceTotal, totalServiceToday, 1000);
+        if(elServiceTotal) {
+            // Parse current content, removing commas
+            const currentServiceTotal = parseInt(elServiceTotal.textContent.replace(/,/g, '')) || 0;
+            animateValue('service_total_sum', currentServiceTotal, totalServiceToday, 1000);
+        }
 
         const genPct = (data.ward_general_total / WARD_GENERAL_TARGET) * 100;
-        document.getElementById('ward_general_percent').textContent = genPct.toFixed(2);
+        if(document.getElementById('ward_general_percent')) document.getElementById('ward_general_percent').textContent = genPct.toFixed(2);
         
         const specPct = (data.ward_special_total / WARD_SPECIAL_TARGET) * 100;
-        document.getElementById('ward_special_percent').textContent = specPct.toFixed(2);
+        if(document.getElementById('ward_special_percent')) document.getElementById('ward_special_percent').textContent = specPct.toFixed(2);
+
+        // --- Calculate Empty Beds for General Ward ---
+        // Using daily census 'ward_general_bed_today' (occupied today) vs 36
+        // NOTE: Actually we should update 'ward_general_occupied_text' as per latest request
+        const elOccupiedText = document.getElementById('ward_general_occupied_text');
+        if(elOccupiedText) {
+            // Display occupied count directly
+            const currentVal = parseInt(elOccupiedText.textContent.replace(/,/g, '')) || 0;
+            animateValue('ward_general_occupied_text', currentVal, Number(data.ward_general_bed_today) || 0, 1000);
+        }
+
+        // --- Update Special Ward Occupied Text ---
+        const elSpecOccupiedText = document.getElementById('ward_special_bed_today_text');
+        if(elSpecOccupiedText) {
+             const currentVal = parseInt(elSpecOccupiedText.textContent.replace(/,/g, '')) || 0;
+             animateValue('ward_special_bed_today_text', currentVal, Number(data.ward_special_bed_today) || 0, 1000);
+        }
+
 
         const updateBar = (barId, txtId, pctValue) => {
+          const bar = document.getElementById(barId);
+          const txt = document.getElementById(txtId);
+          if (!bar || !txt) return;
+
           let pct = pctValue;
           if (isNaN(pct) || !isFinite(pct)) pct = 0;
           const displayPct = Math.min(Math.max(pct, 0), 100);
-          document.getElementById(barId).style.width = `${displayPct}%`;
-          document.getElementById(txtId).textContent = pct.toFixed(1);
+          bar.style.width = `${displayPct}%`;
+          txt.textContent = pct.toFixed(1);
         };
 
         updateBar('bar_gen_today', 'txt_gen_today', (data.ward_general_bed_today * 100) / 36);
@@ -916,9 +957,9 @@
         const btn = document.getElementById('refresh_btn');
         const errBox = document.getElementById('error_box');
         
-        if(!isAuto) {
+        if(!isAuto && btn) {
           btn.querySelector('svg').classList.add('spin');
-          errBox.style.display = 'none';
+          if(errBox) errBox.style.display = 'none';
         }
 
         const proxies = [
@@ -971,12 +1012,12 @@
         if (success) {
           localStorage.setItem('ksm_dashboard_native', JSON.stringify(newData));
           renderDashboard(newData);
-        } else if (!isAuto) {
+        } else if (!isAuto && errBox) {
           errBox.textContent = "โหลดข้อมูลไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ต";
           errBox.style.display = 'block';
         }
 
-        if(!isAuto) btn.querySelector('svg').classList.remove('spin');
+        if(!isAuto && btn) btn.querySelector('svg').classList.remove('spin');
       }
 
       document.addEventListener('DOMContentLoaded', () => {
