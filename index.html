@@ -263,7 +263,7 @@
         padding: 6px 12px; /* ลด Padding จาก 8px เหลือ 6px */
         background: #f9fafb; color: var(--text-muted); font-weight: 600;
         border-bottom: 2px solid var(--border-color);
-        font-size: 12px; /* ปรับขนาดหัวตารางเป็น 12px */
+        font-size: 12px; /* ปรับลดขนาดตัวอักษรหัวตารางเหลือ 12px */
         border-top: none;
       }
       .table-clean th:first-child { text-align: left; padding-left: 12px; }
@@ -508,7 +508,7 @@
                   </div>
                 </div>
 
-                <!-- Occupancy Special -->
+                <!-- Occupancy Special (Integrated) -->
                 <div class="occupancy-box">
                   <div class="occ-label">
                     <span>อัตราครองเตียงตึกปุญโญภาส</span>
@@ -606,11 +606,11 @@
                     <thead>
                         <tr>
                             <!-- ปรับความกว้างคอลัมน์: สิทธิการรักษา 40%, ตัวเลขช่องละ 15% -->
-                            <th style="padding-left:12px; text-align:left; width: 40%;">สิทธิการรักษา</th>
-                            <th class="td-center" style="width: 15%;">วันนี้</th>
-                            <th class="td-center" style="width: 15%;">เดือนนี้</th>
-                            <th class="td-center" style="width: 15%;">ปีที่แล้ว</th>
-                            <th class="td-center" style="padding-right:12px; width: 15%;">+/-</th>
+                            <th style="padding-left:12px; text-align:left; width: 52%;">สิทธิการรักษา</th>
+                            <th class="td-center" style="width: 12%;">วันนี้</th>
+                            <th class="td-center" style="width: 12%;">เดือนนี้</th>
+                            <th class="td-center" style="width: 12%;">ปีที่แล้ว</th>
+                            <th class="td-center" style="padding-right:12px; width: 12%;">+/-</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -807,6 +807,22 @@
 
       document.getElementById('year').textContent = new Date().getFullYear() + 543;
 
+      // Add retry logic for multiple proxies
+      async function fetchWithRetry(proxies, attempt = 0) {
+        if (attempt >= proxies.length) throw new Error("All proxies failed");
+        try {
+          const controller = new AbortController();
+          const id = setTimeout(() => controller.abort(), 3000); // 3s timeout
+          const response = await fetch(proxies[attempt], { signal: controller.signal });
+          clearTimeout(id);
+          if (!response.ok) throw new Error("Response not ok");
+          return await response.text();
+        } catch (e) {
+          console.warn(`Proxy ${attempt} failed:`, e);
+          return fetchWithRetry(proxies, attempt + 1);
+        }
+      }
+
       function updateComparison(lastId, diffId, current, last, isTotal = false) {
         const lastEl = document.getElementById(lastId);
         const diffEl = document.getElementById(diffId);
@@ -967,41 +983,44 @@
           if(errBox) errBox.style.display = 'none';
         }
 
+        // Updated Proxy List: Direct, AllOrigins, CorsProxy
+        // Added direct fetch first as some sheets are open
         const proxies = [
-          `https://corsproxy.io/?${encodeURIComponent(GOOGLE_SHEET_URL)}`,
-          `https://api.allorigins.win/raw?url=${encodeURIComponent(GOOGLE_SHEET_URL)}`
+          `${GOOGLE_SHEET_URL}&t=${Date.now()}`,
+          `https://api.allorigins.win/raw?url=${encodeURIComponent(GOOGLE_SHEET_URL)}&t=${Date.now()}`,
+          `https://corsproxy.io/?${encodeURIComponent(GOOGLE_SHEET_URL)}`
         ];
 
         let success = false;
         let newData = { ...INITIAL_DATA };
 
-        for (const url of proxies) {
-          try {
-            const controller = new AbortController();
-            const id = setTimeout(() => controller.abort(), 3000); 
-            const response = await fetch(`${url}&t=${Date.now()}`, { signal: controller.signal });
-            clearTimeout(id);
-            
-            if (!response.ok) continue;
-            const text = await response.text();
-            if (text.startsWith("<")) continue;
+        try {
+            const text = await fetchWithRetry(proxies);
+            if (!text || text.startsWith("<")) throw new Error("Invalid CSV data");
 
-            const rows = text.split('\n').map(r => r.split(','));
-            rows.forEach(r => {
-              if (r.length >= 2) {
-                const key = r[0]?.trim();
-                const val = r[1]?.trim().replace(/['"]+/g, '');
-                if (key && newData.hasOwnProperty(key)) {
-                  // Ensure commas are removed before storing
-                  const numValue = val.replace(/,/g, '');
-                  newData[key] = isNaN(Number(numValue)) ? val : Number(numValue);
-                }
-                if(['report_date', 'service_pt_desc', 'service_thai_desc', 'service_dental_desc'].includes(key)) {
-                   newData[key] = r[1]?.trim().replace(/['"]+/g, '');
-                }
-              }
+            // More robust CSV parsing (handles quoted values with commas)
+            const rows = text.split('\n');
+            rows.forEach(row => {
+               // Regex to match CSV columns, respecting quotes
+               // FIX: Allow spaces in non-quoted values by removing \s from exclusion
+               const matches = row.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+               if (matches && matches.length >= 2) {
+                   const key = matches[0].replace(/^"|"$/g, '').trim();
+                   let val = matches[1].replace(/^"|"$/g, '').trim(); // Remove quotes
+
+                   if (key && newData.hasOwnProperty(key)) {
+                       if(['report_date', 'service_pt_desc', 'service_thai_desc', 'service_dental_desc'].includes(key)) {
+                           newData[key] = val;
+                       } else {
+                           // Remove commas from numbers
+                           const numValue = val.replace(/,/g, '');
+                           newData[key] = isNaN(Number(numValue)) ? val : Number(numValue);
+                       }
+                   }
+               }
             });
-            
+
+            // Prevent division by zero
             if (newData.ward_general_bed_max === 0) newData.ward_general_bed_max = 1;
             if (newData.ward_general_bed_max_fiscalyear === 0) newData.ward_general_bed_max_fiscalyear = 1;
             if (newData.ward_special_bed_max === 0) newData.ward_special_bed_max = 1;
@@ -1010,8 +1029,9 @@
             if (newData.sum_ward_bed_max_fiscalyear === 0) newData.sum_ward_bed_max_fiscalyear = 1;
 
             success = true;
-            break;
-          } catch (e) { console.log(e); }
+            
+        } catch (e) {
+            console.error("Fetch failed:", e);
         }
 
         if (success) {
